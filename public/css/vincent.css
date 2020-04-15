@@ -33,7 +33,8 @@ a:hover {
 }
 
 .barre_de_navigation {
-    background-color: white;
+    background-color: #000000;
+    opacity: 50%;
 }
 
 .barre_de_navigation, .liens {
@@ -73,7 +74,7 @@ a:hover {
 }
 
 .lien_mon_compte {
-    color: blue!important;
+    color: rgb(0, 0, 0)!important;
 }
 
 .globe {
@@ -187,7 +188,7 @@ hr {
 }
 
 .titre_footer {
-    color: white;
+    color: rgb(0, 0, 0);
     margin-left: 2%!important;
 }
 

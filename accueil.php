@@ -27,10 +27,11 @@ $password = $resultat['password'];
 </head>
 
 <body>
+    <main>
     <header>
         <?php require_once 'partial/header.php' ?>
     </header>
-    <main>
+    
 
         <div class="container text-center">
 
