@@ -27,13 +27,13 @@ $password = $resultat['password'];
 </head>
 
 <body>
-    <main>
+    <main class="accueil">
     <header>
         <?php require_once 'partial/header.php' ?>
     </header>
     
 
-        <div class="container text-center">
+        <div class="container text-center principal">
 
             <?php
                 echo '<h2 class="h2text"> Bonjour ' . $firstname . '<br>
@@ -51,11 +51,12 @@ $password = $resultat['password'];
         </div>
         <hr class="hr">
         <br>
-    
     <footer>
         <?php require_once 'partial/footer.php' ?>
     </footer>
 </main>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="public/js/index.js"></script>
 </body>
 
 </html>

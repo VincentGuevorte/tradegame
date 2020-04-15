@@ -15,7 +15,7 @@ a {
     
 }
 
-main {
+.accueil {
     background-image: url(../img/fond_accueil.jpg);
     background-size: cover;
     background-attachment: fixed;
@@ -58,12 +58,6 @@ a:hover {
     margin-top: 104px;
 }
 
-.titre_image_accueil {
-    color: white;
-    text-shadow: 1px 1px 10px black;
-    animation: slideDown 5s;
-}
-
 .text_image_accueil {
     padding-top: 8%;
 }
@@ -71,6 +65,8 @@ a:hover {
 .profil_user {
     width: 50%;
     height: 200px;
+    margin-top: 8em;
+    margin-bottom: 7.09em;
 }
 
 .lien_mon_compte {
@@ -119,10 +115,6 @@ hr {
     color: blue;
 }
 
-.hr {
-    width: 0em;
-    height: 6.5em;
-}
 .h2text {
     color: rgb(255, 255, 255);
     font-weight: bold;
@@ -135,7 +127,7 @@ hr {
 .popup {
     margin: 20% auto;
     width: 30%;
-    background-color: rgb(174, 240, 180);
+    background-color: rgb(109, 108, 131);
     border-radius: 2%;
     box-shadow: 15px 20px 0 rgba(0, 0, 0, 0.5);
     padding: 1rem;
@@ -199,10 +191,33 @@ hr {
     background-repeat: no-repeat;
 }
 
-.image_contact_fond {
-    background-image: url(../img/design_contact.jpg);
+.mainContact{
+
+    margin-top: 4.5em;
+}
+.contact {
+    background-image: url(../img/fond-contact.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.monCompte {
+
+    background-image: url(../img/fond-mon-compte.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.colorh3 {
+
+    color: white;
+
+}
+
+.principal {
+
+    min-height: 309px;
+
 }
 
 .footer {
@@ -210,6 +225,7 @@ hr {
     height: 100px;
     opacity: 60%;
     background-color: #cec9c5;
+    margin: 0;
     
 }
 
