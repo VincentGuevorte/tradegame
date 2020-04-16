@@ -172,6 +172,9 @@ hr {
 .shadow_image_accueil {
     box-shadow: 5px 5px 10px black;
     border-radius: 2%;
+    margin-left: 33em;
+    margin-right: 33em;
+    color: white;
 }
 
 .formulaire_contact {

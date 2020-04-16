@@ -2,15 +2,14 @@
 session_start();
 require_once 'connexion.php';
 
+// récupère les données de la table
+$stmt = $bdd->prepare("SELECT jeux.*, users.name as username, image.name as imagename FROM jeux 
+inner join image ON jeux.id=image.id_jeux
+inner join users ON jeux.id_users=users.id");
 
-$stmt = $bdd->prepare("SELECT * FROM users where id=:id");
-$result2 = $stmt->execute([':id' => $_SESSION['id']]);
-$resultat = $stmt->fetch();
-$name = $resultat['name'];
-$firstname = $resultat['firstname'];
-$email = $resultat['email'];
-$telephone = $resultat['telephone'];
-$password = $resultat['password'];
+$result2 = $stmt->execute();
+$posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// var_dump($posts);
 
 ?>
 <!DOCTYPE html>
@@ -34,24 +33,37 @@ $password = $resultat['password'];
     </header>
     
 
-        <div class="container text-center principal">
+        <div class="container text-center liste-jeux">
 
-            <?php
-                echo '<h2 class="h2text"> Bonjour ' . $firstname . '<br>
-                Que souhaites-tu faire ?</h2><br>';
-            ?>
-            <h4 class="texth4">Rechercher un jeux</h4>
+        <h4 class="texth4">Rechercher un jeux</h4>
             <input class="search-bar" type="search" id="site-search" name="search"
                 aria-label="Search through site content"><br>
             <button name="search">Rechercher</button>
-            </div>
-            <hr>
-            <div class="container text-center">
-            <h4 class="texth4">Echanger un jeux</h4>
-            <a href="liste-jeux.php"><button name="trade">Trade</button></a>
         </div>
-        <hr class="hr">
-        <br>
+        <?php
+
+foreach ($posts as $post) {
+?>
+
+
+    <div class="border p-3 shadow_image_accueil">
+        <div class=""><i class="fa fa-user fa-md"></i><?= $post['username'] ?></div>
+        <img class="row justify-content-center image_post mx-auto" src="public/img/<?= $post['imagename'] ?>" alt="">
+        <div class="mx-auto">
+            <h4 class=""><?= $post['name'] ?></h4>
+            <span class=""><?= $post['etat'] ?></span><br>
+            <span class=""><?= $post['plateforme'] ?></span><br>
+            <span class=""><?= $post['prix'] ?>€</span><br>
+            <button class="">Contactez le trader</button>
+        </div>
+    </div>
+<?php
+}
+?>
+
+</div>
+
+
     <footer>
         <?php require_once 'partial/footer.php' ?>
     </footer>
