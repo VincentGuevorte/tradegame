@@ -211,6 +211,30 @@ hr {
     background-size: cover;
 }
 
+.mesJeux {
+
+    color: white;
+}
+
+.jeux {
+
+    color: white!important;
+}
+
+.mes-jeux {
+
+    background-image: url(../img/fond-mes-jeux.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.ajoutJeux {
+
+    color: white!important;
+    margin-bottom: 11.74em;
+}
+
 .colorh3 {
 
     color: white;
