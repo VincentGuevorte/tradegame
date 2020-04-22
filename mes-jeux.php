@@ -1,11 +1,15 @@
 <?php
 session_start();
 require_once 'connexion.php';
+require_once 'classes/jeux.php';
 
 
-$stmt = $bdd->prepare("SELECT * FROM jeux");
-$result2 = $stmt->execute();
-$result = $stmt->fetchAll();
+$jeux = new Jeux($bdd);
+
+    $jeux->setId($_SESSION['id']);
+
+    $jeuxInfo = $jeux->selectAll();
+
 
 
 ?>
@@ -47,14 +51,14 @@ $result = $stmt->fetchAll();
 
                             <?php
 
-                foreach ($result as $post){
+                foreach ($jeuxInfo as $jeux){
 
                     echo '<tr>';
-                    echo  '<td>' . $post['name'] . '</td>';
-                    echo '<td>'  . $post['plateforme']  .'</td>';
-                    echo '<td>'  . $post['prix'] .'€</td>';
+                    echo  '<td>' . $jeux['name'] . '</td>';
+                    echo '<td>'  . $jeux['plateforme'] .'</td>';
+                    echo '<td>'  . $jeux['prix'] .'€</td>';
                     echo'<td width=200>';
-                    echo'<a class="btn btn-danger" href="delete-jeux.php?Action=Suppression&id='.$post['id'] . '"><span class="glyphicon glyphicon-remove"></span>Supprimer</a>';
+                    echo'<a class="btn btn-danger" href="delete-jeux.php?Action=Suppression&id='.$jeux['id'] . '"><span class="glyphicon glyphicon-remove"></span>Supprimer</a>';
 
                     echo'</td>';
 

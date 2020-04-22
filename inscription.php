@@ -5,18 +5,27 @@ require_once('classes/user.php');
 // echo password_hash("123", PASSWORD_DEFAULT);
 if (isset($_POST['inscription'])) {
 
-    $user = new User();
+    $user = new User($bdd);
 
-    $user->setBdd($bdd);
-    $user->setNom($_POST['name']);
-    $user->setPrenom($_POST['firstname']);
+    $user->setName($_POST['name']);
+    $user->setFirstname($_POST['firstname']);
     $user->setEmail($_POST['email']);
     $user->setTelephone($_POST['telephone']);
-    $user->setPassword($_POST['password']);
-    
-    $user->insert();
 
-    header('location: login.php');
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+
+    $user->setPassword($password);
+    
+    if ($user->insert()){
+
+header('location: login.php');
+
+    }else{
+
+$error = 'Enregistrement echoué';
+
+    }
+
     }
 
 ?>
@@ -28,7 +37,8 @@ if (isset($_POST['inscription'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Rokkitt&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="public/css/vincent.css">
@@ -76,7 +86,7 @@ if (isset($_POST['inscription'])) {
                         <button type="submit" class="btn btn-warning mt-4" name="inscription">S'inscrire</button>
                     </div>
                 </form>
-
+                <?= isset($error) ? $error : '' ?>
                 <br>
                 <div class="text-center">
                     <a href="login.php">Tu as déjà un compte?</a>

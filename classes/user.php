@@ -3,39 +3,25 @@
 class User {
 
 public $bdd;
-public $nom;
-public $prenom;
+public $name;
+public $firstname;
 public $email;
 public $telephone;
 public $password;
+public $id;
 
+public function __construct($bdd){
 
-/**
- * Get the value of bdd
- */ 
-public function getBdd()
-{
-return $this->bdd;
-}
+$this->bdd=$bdd;
 
-/**
- * Set the value of bdd
- *
- * @return  self
- */ 
-public function setBdd($bdd)
-{
-$this->bdd = $bdd;
-
-return $this;
 }
 
 /**
  * Get the value of nom
  */ 
-public function getNom()
+public function getName()
 {
-return $this->nom;
+return $this->name;
 }
 
 /**
@@ -43,9 +29,9 @@ return $this->nom;
  *
  * @return  self
  */ 
-public function setNom($nom)
+public function setName($name)
 {
-$this->nom = $nom;
+$this->name = $name;
 
 return $this;
 }
@@ -53,9 +39,9 @@ return $this;
 /**
  * Get the value of prenom
  */ 
-public function getPrenom()
+public function getFirstname()
 {
-return $this->prenom;
+return $this->firstname;
 }
 
 /**
@@ -63,9 +49,9 @@ return $this->prenom;
  *
  * @return  self
  */ 
-public function setPrenom($prenom)
+public function setFirstname($firstname)
 {
-$this->prenom = $prenom;
+$this->firstname = $firstname;
 
 return $this;
 }
@@ -130,13 +116,56 @@ $this->password = $password;
 return $this;
 }
 
+/**
+ * Get the value of id
+ */ 
+public function getId()
+{
+return $this->id;
+}
+
+/**
+ * Set the value of id
+ *
+ * @return  self
+ */ 
+public function setId($id)
+{
+$this->id = $id;
+
+return $this;
+}
 public function insert(){
 
     $insert = "INSERT INTO users (name, firstname, email, telephone, password)
     VALUES (:name, :firstname, :email, :telephone, :password)";
    $stmt = $this->bdd->prepare($insert);
-   $stmt->execute(['email' => $this->email, 'firstname' => $this->firstname, 'name' => $this->name,
+  return $stmt->execute(['email' => $this->email, 'firstname' => $this->firstname, 'name' => $this->name,
     'telephone' => $this->telephone, ':password' => $this->password]);
+
+}
+
+public function update(){
+
+    $update = "UPDATE users SET 
+    name=:name,
+    firstname=:firstname,
+    telephone=:telephone,
+    email=:email,
+    password=:password 
+                            WHERE id=:id";
+   $stmt = $this->bdd->prepare($update);
+  return $stmt->execute(['email' => $this->email, 'firstname' => $this->firstname, 'name' => $this->name,
+    'telephone' => $this->telephone, ':password' => $this->password ,':id' => $this->id]);
+
+}
+public function select(){
+
+$select ="SELECT * FROM users where id=:id";
+
+    $stmt = $this->bdd->prepare($select);
+    $result2 = $stmt->execute([':id' => $this->id]);
+    return $stmt->fetch();
 
 }
 }

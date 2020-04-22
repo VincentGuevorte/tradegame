@@ -1,40 +1,39 @@
 <?php
 session_start();
 require_once 'connexion.php';
+require_once 'classes/user.php';
 
-$stmt = $bdd->prepare("SELECT * FROM users where id=:id");
-$result2 = $stmt->execute([':id' => $_SESSION['id']]);
-$resultat = $stmt->fetch();
-$name = $resultat['name'];
-$firstname = $resultat['firstname'];
-$email = $resultat['email'];
-$telephone = $resultat['telephone'];
-$password = $resultat['password'];
+$user = new User($bdd);
+
+    $user->setId($_SESSION['id']);
+
+    $userInfo = $user->select();
 
 if (isset($_POST['modifier'])) {
 
-    $name = $_POST['name'];
-    $firstname = $_POST['firstname'];
-    $telephone = $_POST['telephone'];
-    $email = $_POST['email'];
-    // var_dump($_POST);
-    // die;
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $user->setId($_SESSION['id']);
+    $user->setName($_POST['name']);
+    $user->setFirstname($_POST['firstname']);
+    $user->setEmail($_POST['email']);
+    $user->setTelephone($_POST['telephone']);
 
-    $update = "UPDATE users SET 
-    name=:name,
-    firstname=:firstname,
-    telephone=:telephone,
-    email=:email,
-    password=:password 
-                            WHERE id=:id";
+    if ($_POST['password']==''){
 
+        $password = $userInfo['password'];
+    }else{
+        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    }
+    $user->setPassword($password);
+    
+    if ($user->update()){
 
-    $stmt = $bdd->prepare($update);
-    $result2 = $stmt->execute([':name' => $name, ':firstname' => $firstname,
-     ':telephone' => $telephone, ':email' => $email,':password' => $password, ':id' => ($_SESSION['id'])]);
+header('location: mon_compte.php');
 
-    header('location: mon_compte.php');
+    }else{
+
+$error = 'modification echoué';
+
+    }
 }
 
 ?>
@@ -53,7 +52,7 @@ if (isset($_POST['modifier'])) {
 </head>
 
 <body>
-    <main class="monCompte col-12 d-md-flex">
+    <main class="monCompte">
         <header>
             <?php require_once 'partial/header.php' ?>
         </header>
@@ -62,9 +61,9 @@ if (isset($_POST['modifier'])) {
             <div class="profil_user mx-auto">
                 <?php
 
-                echo '<h3 class="colorh3"> Nom : ' . $name . '</h3>';
-                echo '<h3 class="colorh3"> Prenom : ' . $firstname . '</h3>';
-                echo '<h3 class="colorh3"> Email : ' . $email . '</h3>';
+                echo '<h3 class="colorh3"> Nom : '.$userInfo['name'].'  </h3>';
+                echo '<h3 class="colorh3"> Prenom : '.$userInfo['firstname'].'  </h3>';
+                echo '<h3 class="colorh3"> Email : '.$userInfo['email'].' </h3>';
                 ?>
 
                 <button type="submit" id="btnPopup" class="btnPopup">Modifier mon profil</button>
@@ -80,23 +79,23 @@ if (isset($_POST['modifier'])) {
                             <span id="btnClose" class="btnClose">&times;</span>
                             <div>
                                 <label class="col-4 querie_iphone" for="">Name :</label>
-                                <input class="col-6" type="text" name="name" value="<?= $name ?>">
+                                <input class="col-6" type="text" name="name" value="<?= $userInfo['name'] ?>">
                             </div>
                             <div>
                                 <label class="col-4 querie_iphone" for="">Firstname :</label>
-                                <input class="col-6" type="text" name="firstname" value="<?= $firstname ?>">
+                                <input class="col-6" type="text" name="firstname" value="<?= $userInfo['firstname'] ?>">
                             </div>
                             <div>
                                 <label class="col-4 querie_iphone" for="">Telephone :</label>
-                                <input class="col-6" type="text" name="telephone" value="<?= $telephone ?>">
+                                <input class="col-6" type="text" name="telephone" value="<?= $userInfo['telephone'] ?>">
                             </div>
                             <div>
                                 <label class="col-4 querie_iphone" for="">Email :</label>
-                                <input class="col-6" type="email" name="email" value="<?= $email ?>">
+                                <input class="col-6" type="email" name="email" value="<?= $userInfo['email'] ?>">
                             </div>
                             <div>
                                 <label class="col-4 querie_iphone" for="">Password :</label>
-                                <input class="col-6" type="password" name="password" value="<?= $password ?>">
+                                <input class="col-6" type="password" name="password" value="">
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary" name="modifier">modifier</button>
@@ -112,7 +111,8 @@ if (isset($_POST['modifier'])) {
             <?php require_once 'partial/footer.php' ?>
         </footer>
     </main>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="public/js/index.js"></script>
 </body>
 
