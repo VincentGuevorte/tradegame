@@ -2,6 +2,18 @@
 session_start();
 require_once 'connexion.php';
 
+// require_once 'classes/User.php';
+
+// $User = new User();
+
+// var_dump ($User);
+
+// echo $User->nom;
+// echo $User->prenom;
+
+// echo $User->MettreEnRouge();
+
+
 
 $stmt = $bdd->prepare("SELECT * FROM users where id=:id");
 $result2 = $stmt->execute([':id' => $_SESSION['id']]);

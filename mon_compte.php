@@ -53,7 +53,7 @@ if (isset($_POST['modifier'])) {
 </head>
 
 <body>
-    <main class="monCompte">
+    <main class="monCompte col-12 d-md-flex">
         <header>
             <?php require_once 'partial/header.php' ?>
         </header>

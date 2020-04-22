@@ -1,23 +1,23 @@
 <?php
 session_start();
 require_once('connexion.php');
+require_once('classes/user.php');
 // echo password_hash("123", PASSWORD_DEFAULT);
 if (isset($_POST['inscription'])) {
 
-    $name = $_POST['name'];
-    $firstname = $_POST['firstname'];
-    $email = $_POST['email'];
-    $telephone = $_POST['telephone'];
-    // var_dump($_POST);
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $user = new User();
 
-    $insert = "INSERT INTO users (name, firstname, email, telephone, password)
-     VALUES (:name, :firstname, :email, :telephone, :password)";
-    $stmt = $bdd->prepare($insert);
-    $stmt->execute(['email' => $email, 'firstname' => $firstname, 'name' => $name,
-     'telephone' => $telephone, ':password' => $password]);
-     header('location: login.php');
-}
+    $user->setBdd($bdd);
+    $user->setNom($_POST['name']);
+    $user->setPrenom($_POST['firstname']);
+    $user->setEmail($_POST['email']);
+    $user->setTelephone($_POST['telephone']);
+    $user->setPassword($_POST['password']);
+    
+    $user->insert();
+
+    header('location: login.php');
+    }
 
 ?>
 

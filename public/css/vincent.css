@@ -18,8 +18,9 @@ a {
 .accueil {
     background-image: url(../img/fond_accueil.jpg);
     background-size: cover;
-    background-attachment: fixed;
     background-repeat: no-repeat;
+    min-width: 100%;
+
 }
 
 a:hover {
@@ -303,22 +304,6 @@ hr {
         width: 100%!important;
         height: auto;
     }
-}
 
-/* Portrait
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 812px) 
-  and (-webkit-min-device-pixel-ratio: 3)
-  and (orientation: portrait) { 
 
 }
-
-/* Landscape */
-/* @media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 812px) 
-  and (-webkit-min-device-pixel-ratio: 3)
-  and (orientation: landscape) { 
-
-} */
