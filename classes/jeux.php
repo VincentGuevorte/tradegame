@@ -215,7 +215,7 @@ public function delete(){
         $stmt = $this->bdd->prepare($insert);
         $resultat = $stmt->execute(['etat' => $this->etat, 'plateforme' => $this->plateforme, 'name' => $this->name,
         'prix' => $this->prix, 'id_user' => $this->id_user]);
-        var_dump ($stmt->debugDumpParams());
+        // var_dump ($stmt->debugDumpParams());
         $this->lastInsertId = $this->bdd->lastInsertId();
         return $resultat;
 
