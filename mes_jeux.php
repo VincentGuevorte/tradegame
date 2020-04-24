@@ -10,8 +10,6 @@ $jeux = new Jeux($bdd);
 
     $jeuxInfo = $jeux->selectAll();
 
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +36,14 @@ $jeux = new Jeux($bdd);
             <div class="panel panel-default">
                 <section>
                 <h2 class="jeux">Mes jeux</h2>
+
+                <?php
+if (isset($_GET['message'])){
+
+echo $_GET['message'];
+
+}
+                ?>
                     <table class="table table-striped table-bordered mesJeux">
                         <thead>
                             <tr>
@@ -70,7 +76,7 @@ $jeux = new Jeux($bdd);
                         </tbody>
                     </table>
                 </section>
-                <a class="btn btn-default ajoutJeux" href="add_jeux.php"><span class="glyphicon glyphicon-plus"></span>Ajouter</a>
+                <a class="btn btn-light ajoutJeux" href="ajout_jeux.php"><span class="glyphicon glyphicon-plus"></span>Ajouter</a>
             </div>
 
         </div>

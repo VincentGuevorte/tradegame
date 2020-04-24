@@ -8,6 +8,8 @@ public $etat;
 public $plateforme;
 public $prix;
 public $id;
+public $id_user;
+public $lastInsertId;
 
 public function __construct($bdd){
 
@@ -136,6 +138,46 @@ return $this;
 
 }
 
+/**
+ * Get the value of id_user
+ */ 
+public function getId_user()
+{
+return $this->id_user;
+}
+
+/**
+ * Set the value of id_user
+ *
+ * @return  self
+ */ 
+public function setId_user($id_user)
+{
+$this->id_user = $id_user;
+
+return $this;
+}
+
+/**
+ * Get the value of lastInsertId
+ */ 
+public function getLastInsertId()
+{
+return $this->lastInsertId;
+}
+
+/**
+ * Set the value of lastInsertId
+ *
+ * @return  self
+ */ 
+public function setLastInsertId($lastInsertId)
+{
+$this->lastInsertId = $lastInsertId;
+
+return $this;
+}
+
 public function select(){
 
 $select ="SELECT * FROM jeux where id=:id";
@@ -160,12 +202,22 @@ public function delete(){
 
     $delete = "DELETE FROM jeux where jeux.id=:id";
 
-    $id = (int)$_GET['id'];
-    $stmt = $bdd->prepare($delete);
-    $result2 = $stmt->execute(['id' => $id ?? 1]);
+    $stmt = $this->bdd->prepare($delete);
+    return $stmt->execute(['id' => $this->id]);
 
 
     }
 
+    public function insert(){
 
+        $insert = "INSERT INTO jeux (name, plateforme, etat, prix, id_users)
+        VALUES (:name, :plateforme, :etat, :prix, :id_user)";
+        $stmt = $this->bdd->prepare($insert);
+        $resultat = $stmt->execute(['etat' => $this->etat, 'plateforme' => $this->plateforme, 'name' => $this->name,
+        'prix' => $this->prix, 'id_user' => $this->id_user]);
+        var_dump ($stmt->debugDumpParams());
+        $this->lastInsertId = $this->bdd->lastInsertId();
+        return $resultat;
+
+    }
 }

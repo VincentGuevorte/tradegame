@@ -67,7 +67,7 @@ $error = 'modification echoué';
                 ?>
 
                 <button type="submit" id="btnPopup" class="btnPopup">Modifier mon profil</button>
-                <a href="mes-jeux.php" class=""><button>Mes jeux</button></a><br><br>
+                <a href="mes_jeux.php" class=""><button>Mes jeux</button></a><br><br>
                 <a href="proposition.php" class=""><button>Proposition</button></a>
 
 
