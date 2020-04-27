@@ -18,13 +18,7 @@ if (isset($_POST['ajouter'])) {
 
 $lastIdJeux = $jeux->getLastInsertId();
 
-        $image = new Image($bdd);
 
-
-        $image->setName($_POST['name']);
-        $image->setId_jeux($lastIdJeux);
-
-        $image->insert();
         
 
     $target_dir = "public/img/";
@@ -55,6 +49,16 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fichier"]["tmp_name"], $target_file)) {
+
+        $image = new Image($bdd);
+
+        // $imagename = md5(time());
+        
+                $image->setName($_FILES["fichier"]["name"]);
+                $image->setId_jeux($lastIdJeux);
+        
+                $image->insert();
+
         echo "The file ". basename( $_FILES["fichier"]["name"]). " has been uploaded.";
     } else {
         echo "Sorry, there was an error uploading your file.";

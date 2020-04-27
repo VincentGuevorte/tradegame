@@ -213,6 +213,7 @@ margin-bottom: 0.96em;
     min-width: 100%;
 }
 
+
 .monCompte {
 
     background-image: url(../img/fond-mon-compte.jpg);
@@ -223,7 +224,9 @@ margin-bottom: 0.96em;
 
 .mesJeux {
 
-    color: white;
+    color: whitesmoke;
+    font-size: larger;
+    text-shadow: 0.1em 0.1em 0.1em rgb(0, 0, 0);
 }
 
 .jeux {
