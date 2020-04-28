@@ -197,6 +197,15 @@ public function selectAll(){
         return $stmt->fetchAll();
     
     }
+    public function selectAllByIdUser($id){
+
+        $select ="SELECT * FROM jeux WHERE id_users = :id";
+        
+            $stmt = $this->bdd->prepare($select);
+            $result2 = $stmt->execute(['id' => $id]);
+            return $stmt->fetchAll();
+        
+        }
 
 public function delete(){
 
@@ -218,6 +227,28 @@ public function delete(){
         // var_dump ($stmt->debugDumpParams());
         $this->lastInsertId = $this->bdd->lastInsertId();
         return $resultat;
+
+    }
+
+    public function search($word){
+
+        $stmt = $this->bdd->prepare('SELECT jeux.*, users.name as username, image.name as imagename FROM jeux
+        inner join users ON jeux.id_users=users.id 
+        inner join image ON jeux.id=image.id_jeux WHERE jeux.name LIKE :q ORDER BY jeux.id DESC');
+        $result2 = $stmt->execute(['q'=>"%$word%"]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+
+    }
+
+    public function selectAllWithInfo(){
+
+        $stmt = $this->bdd->prepare("SELECT jeux.*, users.name as username, image.name as imagename FROM jeux 
+        inner join image ON jeux.id=image.id_jeux
+        inner join users ON jeux.id_users=users.id");
+        
+        $result2 = $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     }
 }

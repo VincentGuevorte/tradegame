@@ -3,12 +3,10 @@ session_start();
 require_once 'connexion.php';
 require_once 'classes/jeux.php';
 
-
+// var_dump($_SESSION);
 $jeux = new Jeux($bdd);
 
-    $jeux->setId($_SESSION['id']);
-
-    $jeuxInfo = $jeux->selectAll();
+    $jeuxInfo = $jeux->selectAllByIdUser($_SESSION['id']);
 
 ?>
 <!DOCTYPE html>
