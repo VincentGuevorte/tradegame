@@ -15,6 +15,7 @@ if (isset($_POST['q']) and !empty($_POST['q'])) {
     $q = htmlspecialchars(trim($_POST['q']));
 
     $posts = $jeux->search($q);
+    
 }
 
 ?>
@@ -64,7 +65,7 @@ if (isset($_POST['q']) and !empty($_POST['q'])) {
                                 <span class=""><?= $post['etat'] ?></span><br>
                                 <span class=""><?= $post['plateforme'] ?></span><br>
                                 <span class=""><?= $post['prix'] ?>€</span><br>
-                                <a href="detail-jeux.php" class="btn btn-light">Contactez le trader</a>
+                                <?= '<a href="detail-jeux.php?id='.$post['id'].'" class="btn btn-light">Details</a>' ?>
                             </div>
                         </div>
                     </div>
