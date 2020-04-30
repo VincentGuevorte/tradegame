@@ -251,4 +251,16 @@ class Jeux
         $result2 = $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function selectAllById($id)
+    {
+
+        $stmt = $this->bdd->prepare("SELECT jeux.*, users.name as username, image.name as imagename FROM jeux 
+        inner join image ON jeux.id=image.id_jeux
+        inner join users ON jeux.id_users=users.id
+        WHERE jeux.id = :id");
+
+        $result2 = $stmt->execute(['id'=> $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

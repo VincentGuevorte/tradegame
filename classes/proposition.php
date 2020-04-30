@@ -176,18 +176,30 @@ class Proposition
         return $stmt->execute(['id' => $this->id]);
     }
 
-    public function selectAllByIdUser($id){
+    public function selectAllByIdUser($id)
+    {
 
-        $select ="SELECT *,users.name as username FROM proposition 
+        $select = "SELECT *,users.name as username FROM proposition 
         inner join users ON proposition.id_users = users.id
         
         
         WHERE id_users = :id";
-        
-            $stmt = $this->bdd->prepare($select);
-            $result2 = $stmt->execute(['id' => $id]);
-            return $stmt->fetchAll();
-        
-        }
 
+        $stmt = $this->bdd->prepare($select);
+        $result2 = $stmt->execute(['id' => $id]);
+        return $stmt->fetchAll();
+    }
+    public function insert(){
+
+        $insert = "INSERT INTO proposition (commentaire, id_users, id_jeux_user, id_jeux_wanted)
+        VALUES (:commentaire, :id_users, :id_jeux_user, :id_jeux_wanted)";
+        $stmt = $this->bdd->prepare($insert);
+        $resultat = $stmt->execute(['commentaire' => $this->commentaire,'id_users' => $this->id_users,
+            'id_jeux_user' => $this->id_jeux_user, 'id_jeux_wanted' => $this->id_jeux_wanted
+        ]);
+        // var_dump ($stmt->debugDumpParams());
+        $this->lastInsertId = $this->bdd->lastInsertId();
+        return $resultat;
+
+    }
 }
