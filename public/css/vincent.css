@@ -125,6 +125,13 @@ hr {
     font-weight: bold;
 }
 
+.h2trade {
+
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-shadow: 0.1em 0.1em 0.1em rgb(0, 0, 0);
+}
+
 .popup {
     margin: 20% auto;
     width: 30%;
@@ -286,7 +293,6 @@ width: 60%;
     height: 100px;
     opacity: 60%;
     background-color: #cec9c5;
-    margin: 0;
     
 }
 

@@ -179,7 +179,7 @@ class Proposition
     public function selectAllByIdUser($id)
     {
 
-        $select = "SELECT *,users.name as username FROM proposition 
+        $select = "SELECT proposition.* ,users.name as username FROM proposition 
         inner join users ON proposition.id_users = users.id
         
         
@@ -187,6 +187,8 @@ class Proposition
 
         $stmt = $this->bdd->prepare($select);
         $result2 = $stmt->execute(['id' => $id]);
+        // var_dump ($stmt->debugDumpParams());
+        // exit;
         return $stmt->fetchAll();
     }
     public function insert(){
@@ -194,12 +196,26 @@ class Proposition
         $insert = "INSERT INTO proposition (commentaire, id_users, id_jeux_user, id_jeux_wanted)
         VALUES (:commentaire, :id_users, :id_jeux_user, :id_jeux_wanted)";
         $stmt = $this->bdd->prepare($insert);
-        $resultat = $stmt->execute(['commentaire' => $this->commentaire,'id_users' => $this->id_users,
+        $resultat = $stmt->execute(['commentaire' => $this->commentaire,'id_users' => $this->id_user,
             'id_jeux_user' => $this->id_jeux_user, 'id_jeux_wanted' => $this->id_jeux_wanted
         ]);
         // var_dump ($stmt->debugDumpParams());
+        // exit;
         $this->lastInsertId = $this->bdd->lastInsertId();
         return $resultat;
 
     }
+
+    // public function selectAllById($id)
+    // {
+
+    //     $stmt = $this->bdd->prepare("SELECT proposition.*, users.name as username, image.name as imagename FROM jeux 
+    //     inner join image ON jeux.id=image.id_jeux
+    //     inner join users ON jeux.id_users=users.id
+    //     inner join jeux ON jeux.id = proposition.id_jeux_wanted
+    //     WHERE jeux.id = :id");
+
+    //     $result2 = $stmt->execute(['id'=> $id]);
+    //     return $stmt->fetch(PDO::FETCH_ASSOC);
+    // }
 }

@@ -29,7 +29,7 @@ $jeux = new Jeux($bdd);
             <?php require_once 'partial/header.php' ?>
         </header>
 
-
+<div class="container-fluid">
         <div class="container text-center principal">
             <div class="panel panel-default">
                 <section>
@@ -77,6 +77,7 @@ echo $_GET['message'];
                 <a class="btn btn-light ajoutJeux" href="ajout_jeux.php"><span class="glyphicon glyphicon-plus"></span>Ajouter</a>
             </div>
 
+        </div>
         </div>
         <footer>
             <?php require_once 'partial/footer.php' ?>

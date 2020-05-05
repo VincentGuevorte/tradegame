@@ -17,17 +17,20 @@ if (isset($_GET['id'])) {
     if (isset($_POST["envoyer"])) {
 
         $proposition = new Proposition($bdd);
-
+var_dump($_POST);
         $proposition->setId_user($_SESSION['id']);
-        $proposition->setId_jeux_user($_POST['id']);
+        $proposition->setId_jeux_user($_POST['jeux']);
         $proposition->setId_jeux_wanted($id);
 
         $proposition->insert();
-    } else {
+        
+    } 
+    
+}
+else {
 
-        // header('location:notfound.php');
+    // header('location:notfound.php');
 
-    }
 }
 
 // var_dump($jeuxInfo);
@@ -78,7 +81,7 @@ if (isset($_GET['id'])) {
                         <span class=""><?= $jeuxInfo['plateforme'] ?></span><br>
                         <span class=""><?= $jeuxInfo['etat'] ?></span><br>
                         <span class=""><?= $jeuxInfo['prix'] ?>€</span><br>
-                        <form action="" class="">
+                        <form method="post" action="detail-jeux.php?id=<?= $_GET['id']?>" class="">
                             <select name="jeux" id="jeux-select">
                                 <?php
                                     foreach ($posts as $post) {
@@ -87,7 +90,7 @@ if (isset($_GET['id'])) {
                                                                                                         }
                                                                                                             ?>
                             </select><br>
-                            <button type="submit" class="btn btn-light">Proposer echange</button>
+                            <button type="submit" name="envoyer" class="btn btn-light">Proposer echange</button>
                         </form>
                     </div>
                 </div>

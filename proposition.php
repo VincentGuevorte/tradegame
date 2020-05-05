@@ -47,11 +47,10 @@ $proposition = new Proposition($bdd);
                             <?php
 
                 foreach ($propositionInfo as $proposition){
-
                     echo '<tr>';
                     echo  '<td>' . $proposition['username'] . '</td>';
                     echo'<td width=200>';
-                    echo  '<a class="btn btn-primary" href="view_user.php?id='.$proposition['id'] . '">
+                    echo  '<a class="btn btn-primary" href="trade.php?id='.$proposition['id'] . '">
                     <span class="glyphicon glyphicon-eye-open"></span>Voir</a>';
                     echo'<td width=200>';
                     echo'<a class="btn btn-danger" href="delete-proposition.php?Action=Suppression&id=
