@@ -82,10 +82,10 @@ if (isset($_GET['id'])) {
             <br>
             <div class="row text-center">
                 <div class="col-lg-6">
-                    <a class="btn btn-light">OUI</a>
+                    <a href="" class="btn btn-light modif_status" data-id="<?= $id ?>">OUI</a>
                 </div>
                 <div class="col-lg-6">
-                    <a class="btn btn-danger">NON</a>
+                    <a href="proposition.php" class="btn btn-danger modif_status" data-id="<?= $id ?>">NON</a>
                 </div>
             </div>
         </div>

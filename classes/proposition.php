@@ -10,6 +10,8 @@ class Proposition
     public $id_jeux_user;
     public $id_jeux_wanted;
     public $lastInsertId;
+    public $status;
+
 
     public function __construct($bdd)
     {
@@ -156,6 +158,25 @@ class Proposition
 
         return $this;
     }
+/**
+     * Get the value of status
+     */ 
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set the value of status
+     *
+     * @return  self
+     */ 
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
 
     public function select()
     {
@@ -206,6 +227,16 @@ class Proposition
 
     }
 
+    public function updateStatus($id, $status){
+
+        $update = "UPDATE proposition SET 
+        status=:status
+                                WHERE id=:id";
+       $stmt = $this->bdd->prepare($update);
+       $stmt->execute(['status' => $status,'id' => $id]);
+    
+    }
+
     // public function selectAllById($id)
     // {
 
@@ -218,4 +249,5 @@ class Proposition
     //     $result2 = $stmt->execute(['id'=> $id]);
     //     return $stmt->fetch(PDO::FETCH_ASSOC);
     // }
+
 }
