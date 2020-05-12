@@ -1,14 +1,13 @@
 <?php 
 session_start();
 require_once('connexion.php');
+require_once('classes/connexion.php');
 
 if (isset($_POST['login'])) {
-      $email = htmlspecialchars($_POST['email']);
-      $password = htmlspecialchars($_POST['password']);
-      $reponse = $bdd->query("SELECT * FROM users where email='$email'");
-      $resultat = $reponse->fetch();
+
+      $resultat = $user->getUserByEmail($_POST['email']);
     //   var_dump($resultat);
-      if (count($resultat) > 0 && password_verify($password, $resultat['password'])) {
+      if (count($resultat) > 0 && password_verify($_POST['password'], $resultat['password'])) {
           $_SESSION['email'] = $resultat['email'];
           $_SESSION['id'] = $resultat['id'];
           header('location: accueil.php');

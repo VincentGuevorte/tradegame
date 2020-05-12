@@ -13,7 +13,7 @@ class Proposition
     public $status;
 
 
-    public function __construct($bdd)
+    public function __construct(PDO $bdd)
     {
 
         $this->bdd = $bdd;
@@ -54,7 +54,7 @@ class Proposition
      */
     public function setCommentaire($commentaire)
     {
-        $this->commentaire = $commentaire;
+        $this->commentaire = htmlspecialchars($commentaire);
 
         return $this;
     }
@@ -72,7 +72,7 @@ class Proposition
      *
      * @return  self
      */
-    public function setId($id)
+    public function setId(int $id)
     {
         $this->id = $id;
 
@@ -92,7 +92,7 @@ class Proposition
      *
      * @return  self
      */
-    public function setId_user($id_user)
+    public function setId_user(int $id_user)
     {
         $this->id_user = $id_user;
 
@@ -112,7 +112,7 @@ class Proposition
      *
      * @return  self
      */
-    public function setId_jeux_user($id_jeux_user)
+    public function setId_jeux_user(int $id_jeux_user)
     {
         $this->id_jeux_user = $id_jeux_user;
 
@@ -132,7 +132,7 @@ class Proposition
      *
      * @return  self
      */
-    public function setId_jeux_wanted($id_jeux_wanted)
+    public function setId_jeux_wanted(int $id_jeux_wanted)
     {
         $this->id_jeux_wanted = $id_jeux_wanted;
 
@@ -154,7 +154,7 @@ class Proposition
      */
     public function setLastInsertId($lastInsertId)
     {
-        $this->lastInsertId = $lastInsertId;
+        $this->lastInsertId = htmlspecialchars($lastInsertId);
 
         return $this;
     }
@@ -173,7 +173,7 @@ class Proposition
      */ 
     public function setStatus($status)
     {
-        $this->status = $status;
+        $this->status = htmlspecialchars($status);
 
         return $this;
     }
@@ -197,7 +197,7 @@ class Proposition
         return $stmt->execute(['id' => $this->id]);
     }
 
-    public function selectAllByIdUser($id)
+    public function selectAllByIdUser(int $id)
     {
 
         $select = "SELECT proposition.* ,users.name as username FROM proposition 
@@ -227,27 +227,13 @@ class Proposition
 
     }
 
-    public function updateStatus($id, $status){
-
+    public function updateStatus(int $id, $status){
+        $status = htmlspecialchars($status);
         $update = "UPDATE proposition SET 
         status=:status
                                 WHERE id=:id";
        $stmt = $this->bdd->prepare($update);
-       $stmt->execute(['status' => $status,'id' => $id]);
+       return $stmt->execute(['status' => $status,'id' => $id]);
     
     }
-
-    // public function selectAllById($id)
-    // {
-
-    //     $stmt = $this->bdd->prepare("SELECT proposition.*, users.name as username, image.name as imagename FROM jeux 
-    //     inner join image ON jeux.id=image.id_jeux
-    //     inner join users ON jeux.id_users=users.id
-    //     inner join jeux ON jeux.id = proposition.id_jeux_wanted
-    //     WHERE jeux.id = :id");
-
-    //     $result2 = $stmt->execute(['id'=> $id]);
-    //     return $stmt->fetch(PDO::FETCH_ASSOC);
-    // }
-
 }

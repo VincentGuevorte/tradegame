@@ -1,7 +1,9 @@
 <?php
 
 session_start();
+
 require_once 'connexion.php';
+require_once 'include/private.php';
 require_once 'classes/proposition.php';
 
 if (!isset($_GET['Action'])) $_GET['Action']="";

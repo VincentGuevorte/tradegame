@@ -12,7 +12,7 @@ class Jeux
     public $id_user;
     public $lastInsertId;
 
-    public function __construct($bdd)
+    public function __construct(PDO $bdd)
     {
 
         $this->bdd = $bdd;
@@ -53,7 +53,7 @@ class Jeux
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = htmlspecialchars($name);
 
         return $this;
     }
@@ -73,7 +73,7 @@ class Jeux
      */
     public function setEtat($etat)
     {
-        $this->etat = $etat;
+        $this->etat = htmlspecialchars($etat);
 
         return $this;
     }
@@ -93,7 +93,7 @@ class Jeux
      */
     public function setPlateforme($plateforme)
     {
-        $this->plateforme = $plateforme;
+        $this->plateforme = htmlspecialchars($plateforme);
 
         return $this;
     }
@@ -113,7 +113,7 @@ class Jeux
      */
     public function setPrix($prix)
     {
-        $this->prix = $prix;
+        $this->prix = htmlspecialchars($prix);
 
         return $this;
     }
@@ -131,7 +131,7 @@ class Jeux
      *
      * @return  self
      */
-    public function setId($id)
+    public function setId(int $id)
     {
         $this->id = $id;
 
@@ -151,7 +151,7 @@ class Jeux
      *
      * @return  self
      */
-    public function setId_user($id_user)
+    public function setId_user(int $id_user)
     {
         $this->id_user = $id_user;
 
@@ -171,7 +171,7 @@ class Jeux
      *
      * @return  self
      */
-    public function setLastInsertId($lastInsertId)
+    public function setLastInsertId(int $lastInsertId)
     {
         $this->lastInsertId = $lastInsertId;
 
@@ -197,7 +197,7 @@ class Jeux
         $result2 = $stmt->execute();
         return $stmt->fetchAll();
     }
-    public function selectAllByIdUser($id)
+    public function selectAllByIdUser(int $id)
     {
 
         $select = "SELECT * FROM jeux WHERE id_users = :id";
@@ -233,7 +233,7 @@ class Jeux
 
     public function search($word)
     {
-
+$word = htmlspecialchars($word);
         $stmt = $this->bdd->prepare('SELECT jeux.*, users.name as username, image.name as imagename FROM jeux
         inner join users ON jeux.id_users=users.id 
         inner join image ON jeux.id=image.id_jeux WHERE jeux.name LIKE :q ORDER BY jeux.id DESC');
@@ -252,7 +252,7 @@ class Jeux
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function selectAllById($id)
+    public function selectAllById(int $id)
     {
 
         $stmt = $this->bdd->prepare("SELECT jeux.*, users.name as username, image.name as imagename FROM jeux 

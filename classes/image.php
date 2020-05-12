@@ -7,7 +7,7 @@ public $name;
 public $id;
 public $id_jeux;
 
-public function __construct($bdd){
+public function __construct(PDO $bdd){
 
 $this->bdd=$bdd;
 
@@ -49,7 +49,7 @@ return $this->name;
  */ 
 public function setName($name)
 {
-$this->name = $name;
+$this->name = htmlspecialchars($name);
 
 return $this;
 }
@@ -67,7 +67,7 @@ return $this->id;
  *
  * @return  self
  */ 
-public function setId($id)
+public function setId(int $id)
 {
 $this->id = $id;
 
@@ -87,7 +87,7 @@ return $this->id_jeux;
  *
  * @return  self
  */ 
-public function setId_jeux($id_jeux)
+public function setId_jeux(int $id_jeux)
 {
 $this->id_jeux = $id_jeux;
 
