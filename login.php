@@ -1,7 +1,8 @@
 <?php 
 session_start();
 require_once('connexion.php');
-require_once('classes/connexion.php');
+require_once('classes/user.php');
+
 
 if (isset($_POST['login'])) {
 
