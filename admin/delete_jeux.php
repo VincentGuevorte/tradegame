@@ -3,8 +3,6 @@
 session_start();
 
 require_once '../connexion.php';
-require_once('../include/private_admin.php');
-
 
 
 if (!isset($_GET['Action'])) $_GET['Action']="";
@@ -16,5 +14,5 @@ if ($Action=="Suppression")
     $stmt = $bdd->prepare("DELETE FROM post where post.id=:id");
     $result2 = $stmt->execute(['id' => $id ?? 1]);
 
-    header('location:post.php');
+    header('location:jeux.php');
 }

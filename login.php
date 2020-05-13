@@ -3,15 +3,24 @@ session_start();
 require_once('connexion.php');
 require_once('classes/user.php');
 
-
 if (isset($_POST['login'])) {
+
+    $user = new User($bdd);
 
       $resultat = $user->getUserByEmail($_POST['email']);
     //   var_dump($resultat);
       if (count($resultat) > 0 && password_verify($_POST['password'], $resultat['password'])) {
           $_SESSION['email'] = $resultat['email'];
           $_SESSION['id'] = $resultat['id'];
-          header('location: accueil.php');
+          $_SESSION['role'] = $resultat['role'];
+
+          header('location: index.php');
+
+          if ($resultat['role']=='ROLE_ADMIN'){
+
+            header('location: admin/index.php');
+          }
+
       } else {
           $erreur = 'Non valide';
       };

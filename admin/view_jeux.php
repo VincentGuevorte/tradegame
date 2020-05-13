@@ -3,12 +3,11 @@
 session_start();
 
 require_once '../connexion.php';
-require_once('../include/private.php');
 
 
 
 $id = (int)$_GET['id'];
-$stmt = $bdd->prepare("SELECT * FROM post where post.id=:id");
+$stmt = $bdd->prepare("SELECT * FROM jeux where jeux.id=:id");
 $result2 = $stmt->execute(['id' => $id ?? 1]);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -35,10 +34,10 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <thead>
                     <tr>
                         <th>Nom</th>
-                        <th>Description</th>
-                        <th>Type</th>
+                        <th>Plateforme</th>
+                        <th>Etat</th>
+                        <th>prix</th>
                         <th>isActive</th>
-                        <th>ID Category</th>
                         <th>ID Users</th>
 
                     </tr>
@@ -51,11 +50,11 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                         echo '<tr>';
                         echo  '<td>' . $post['name'] . '</td>';
-                        echo '<td>'  . $post['description']  .'</td>';
-                        echo '<td>'  . $post['type']  .'</td>';
+                        echo '<td>'  . $post['plateforme']  .'</td>';
+                        echo '<td>'  . $post['etat']  .'</td>';
+                        echo '<td>'  . $post['prix']  .'</td>';
                         echo '<td>'  . $post['isActive']  .'</td>';
-                        echo '<td>'  . $post['id_category']  .'</td>';
-                        echo '<td>'  . $post['id_user']  .'</td>';
+                        echo '<td>'  . $post['id_users']  .'</td>';
 
                         echo'</td>';
 

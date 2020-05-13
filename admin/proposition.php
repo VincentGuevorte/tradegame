@@ -3,13 +3,12 @@
 session_start();
 
 require_once '../connexion.php';
-require_once('../include/private_admin.php');
+require_once '../classes/proposition.php';
 
+$proposition = new Proposition($bdd);
 
+    $propositionInfo = $proposition->selectAll();
 
-$stmt = $bdd->prepare("SELECT * FROM utilisateurs");
-$result2 = $stmt->execute();
-$result = $stmt->fetchAll();
 
 ?>
 
@@ -31,26 +30,26 @@ $result = $stmt->fetchAll();
     <div class="panel panel-default">
         <section>
             <table class="table table-striped table-bordered">
-                <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Prenom</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
+            <thead>
+                            <tr>
+                                <th>Traders</th>
+                                <th>Deal</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                <?php
+                            <?php
 
-                foreach ($result as $user){
-
+                foreach ($propositionInfo as $proposition){
                     echo '<tr>';
-                    echo  '<td>' . $user['name'] . '</td>';
-                    echo '<td>'  . $user['firstname']  .'</td>';
+                    echo  '<td>' . $proposition['username'] . '</td>';
                     echo'<td width=200>';
-                    echo  '<a class="btn btn-default" href="view.php?id='.$user['id'] . '"><span class="glyphicon glyphicon-eye-open"></span>Voir</a>';
-                    echo ' ';
-                    echo'<a class="btn btn-danger" href="delete_user.php?Action=Suppression&id='.$user['id'] . '"><span class="glyphicon glyphicon-remove"></span>Supprimer</a>';
+                    echo  '<a class="btn btn-primary" href="trade.php?id='.$proposition['id'] . '">
+                    <span class="glyphicon glyphicon-eye-open"></span>Voir</a>';
+                    echo'<td width=200>';
+                    echo'<a class="btn btn-danger" href="delete-proposition.php?Action=Suppression&id=
+                    '.$proposition['id'] . '"><span class="glyphicon glyphicon-remove"></span>Supprimer</a>';
 
                     echo'</td>';
 
@@ -60,6 +59,7 @@ $result = $stmt->fetchAll();
                 </tbody>
             </table>
         </section>
+        <a class="btn btn-default" href="add_post.php"><span class="glyphicon glyphicon-plus"></span>Ajouter</a>
     </div>
 </div>
 </body>

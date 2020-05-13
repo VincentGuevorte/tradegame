@@ -212,6 +212,20 @@ class Proposition
         // exit;
         return $stmt->fetchAll();
     }
+
+    public function selectAll()
+    {
+
+        $select = "SELECT proposition.* ,users.name as username FROM proposition 
+        inner join users ON proposition.id_users = users.id";
+
+        $stmt = $this->bdd->prepare($select);
+        $result2 = $stmt->execute();
+        // var_dump ($stmt->debugDumpParams());
+        // exit;
+        return $stmt->fetchAll();
+    }
+
     public function insert(){
 
         $insert = "INSERT INTO proposition (commentaire, id_users, id_jeux_user, id_jeux_wanted)

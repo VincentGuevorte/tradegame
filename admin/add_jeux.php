@@ -1,24 +1,11 @@
 <?php
 session_start();
 require_once('../connexion.php');
-require_once('../include/private_admin.php');
 
 
 if (isset($_POST['ajouter'])) {
 
-    $name = $_POST['name'];
-    $description = $_POST['description'];
-    $type = $_POST['type'];
-    $isActive = $_POST['isActive'];
-    $idCategory = $_POST['id_category'];
-    $idUser = $_POST['id_user'];
-
-    $insert = "INSERT INTO post (name, description, type, isActive, id_category, id_user)
-               VALUES (:name, :description, :type, :isActive, :id_category, :id_user)";
-    $stmt = $bdd->prepare($insert);
-    $stmt->execute(['name' => $name, 'description' => $description, 'type' => $type, 'isActive' => $isActive,
-                    'id_category' => $idCategory, ':id_user' => $idUser]);
-                    header("location:post.php");
+    
 }
 ?>
 
@@ -45,11 +32,9 @@ if (isset($_POST['ajouter'])) {
                     <div class="loginbaslik">Ajouter un poste</div>
                     <hr style="border: 1px solid #ccc;">
                     <input class="giris" type="text" name="name" placeholder="name">
-                    <input class="giris" type="text" name="type" placeholder="type de poste">
-                    <input class="giris" type="number" name="isActive" placeholder="0 or 1">
-                    <input class="giris" type="number" name="id_category" placeholder="id category">
-                    <input class="giris" type="number" name="id_user" placeholder="id user">
-                    <input class="giris" type="text" name="description" placeholder="entre ton texte ici...">
+                    <input class="giris" type="text" name="plateforme" placeholder="plateforme">
+                    <input class="giris" type="text" name="etat" placeholder="etat">
+                    <input class="giris" type="number" name="prix" placeholder="prix">
                     <a href="https://dogukankeskin.com" target="blank"><input class="butonlogin" type="submit" name="ajouter" value="ajouter"></a>
                 </div>
             </form>

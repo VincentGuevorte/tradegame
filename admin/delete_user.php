@@ -3,7 +3,6 @@
 session_start();
 
 require_once '../connexion.php';
-require_once('../include/private_admin.php');
 
 
 

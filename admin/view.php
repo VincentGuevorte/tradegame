@@ -3,12 +3,11 @@
 session_start();
 
 require_once '../connexion.php';
-require_once('../include/private.php');
 
 
 
 $id = $_GET['id'];
-$stmt = $bdd->prepare("SELECT * FROM utilisateurs where utilisateurs.id=:id");
+$stmt = $bdd->prepare("SELECT * FROM users where users.id=:id");
 $result2 = $stmt->execute(['id' => $id ?? 1]);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

@@ -3,11 +3,10 @@
 session_start();
 
 require_once '../connexion.php';
-require_once '../include/private_admin.php';
 
 
 
-$stmt = $bdd->prepare("SELECT * FROM post");
+$stmt = $bdd->prepare("SELECT * FROM users");
 $result2 = $stmt->execute();
 $result = $stmt->fetchAll();
 
@@ -34,8 +33,7 @@ $result = $stmt->fetchAll();
                 <thead>
                 <tr>
                     <th>Nom</th>
-                    <th>Description</th>
-                    <th>Type</th>
+                    <th>Prenom</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -43,28 +41,24 @@ $result = $stmt->fetchAll();
 
                 <?php
 
-                foreach ($result as $post){
+                foreach ($result as $user){
 
                     echo '<tr>';
-                    echo  '<td>' . $post['name'] . '</td>';
-                    echo '<td>'  . $post['description']  .'</td>';
-                    echo '<td>'  . $post['type']  .'</td>';
+                    echo  '<td>' . $user['name'] . '</td>';
+                    echo '<td>'  . $user['firstname']  .'</td>';
                     echo'<td width=200>';
-                    echo  '<a class="btn btn-default" href="view_post.php?id='.$post['id'] . '"><span class="glyphicon glyphicon-eye-open"></span>Voir</a>';
+                    echo  '<a class="btn btn-default" href="view.php?id='.$user['id'] . '"><span class="glyphicon glyphicon-eye-open"></span>Voir</a>';
                     echo ' ';
-                    echo'<a class="btn btn-danger" href="delete_post.php?Action=Suppression&id='.$post['id'] . '"><span class="glyphicon glyphicon-remove"></span>Supprimer</a>';
+                    echo'<a class="btn btn-danger" href="delete_user.php?Action=Suppression&id='.$user['id'] . '"><span class="glyphicon glyphicon-remove"></span>Supprimer</a>';
 
                     echo'</td>';
 
                     echo'</tr>';
-
                 }
-
                 ?>
                 </tbody>
             </table>
         </section>
-        <a class="btn btn-default" href="add_post.php"><span class="glyphicon glyphicon-plus"></span>Ajouter</a>
     </div>
 </div>
 </body>
@@ -79,4 +73,3 @@ $result = $stmt->fetchAll();
         crossorigin="anonymous"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </html>
-

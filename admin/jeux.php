@@ -1,7 +1,13 @@
 <?php
 
 session_start();
+
 require_once '../connexion.php';
+
+
+$stmt = $bdd->prepare("SELECT * FROM jeux");
+$result2 = $stmt->execute();
+$result = $stmt->fetchAll();
 
 ?>
 
@@ -22,8 +28,39 @@ require_once '../connexion.php';
 <div class="col-md-10 content">
     <div class="panel panel-default">
         <section>
-           
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Plateforme</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <?php
+
+                foreach ($result as $post){
+
+                    echo '<tr>';
+                    echo  '<td>' . $post['name'] . '</td>';
+                    echo '<td>'  . $post['plateforme']  .'</td>';
+                    echo'<td width=200>';
+                    echo  '<a class="btn btn-default" href="view_jeux.php?id='.$post['id'] . '"><span class="glyphicon glyphicon-eye-open"></span>Voir</a>';
+                    echo ' ';
+                    echo'<a class="btn btn-danger" href="delete_jeux.php?Action=Suppression&id='.$post['id'] . '"><span class="glyphicon glyphicon-remove"></span>Supprimer</a>';
+
+                    echo'</td>';
+
+                    echo'</tr>';
+
+                }
+
+                ?>
+                </tbody>
+            </table>
         </section>
+        <a class="btn btn-default" href="add_post.php"><span class="glyphicon glyphicon-plus"></span>Ajouter</a>
     </div>
 </div>
 </body>
@@ -38,3 +75,4 @@ require_once '../connexion.php';
         crossorigin="anonymous"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </html>
+

@@ -1,8 +1,21 @@
+<?php 
+
+// if ($_SESSION['role']!= 'ROLE_ADMIN'){
+// // var_dump($_SESSION);
+// // exit;
+// header('location: index.php');
+
+// }
+
+?>
+
+
+
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid d-flex">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-                <img src="../img/SAFEZONE.png">
+
         </div>
     </div><!-- /.container-fluid -->
     <div>
@@ -22,8 +35,9 @@
                     <!-- Main Menu -->
                     <div class="side-menu-container">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="utilisateur.php"><span class="glyphicon glyphicon-user"></span>Utilisateurs</a></li>
-                            <li><a href="post.php"><span class="glyphicon glyphicon-book"></span>Postes</a></li>
+                            <li class="active"><a href="users.php"><span class="glyphicon glyphicon-user"></span>Users</a></li>
+                            <li><a href="jeux.php"><span class="glyphicon glyphicon-book"></span>Jeux</a></li>
+                            <li><a href="proposition.php"><span class="glyphicon glyphicon-sort"></span>Proposition</a></li>
                             <li><a href="message.php"><span class="glyphicon glyphicon-envelope"></span>Messages</a></li>
                             <li><a class="nav-link lien_mon_compte btn-light border" href="deconnexion.php"><span class="glyphicon glyphicon-off"></span>Logout</a></li>
                     </div><!-- /.navbar-collapse -->
