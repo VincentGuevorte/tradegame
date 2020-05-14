@@ -178,6 +178,15 @@ class Proposition
         return $this;
     }
 
+    public function selectInAdmin()
+    {
+
+        $select = "SELECT * FROM proposition";
+
+        $stmt = $this->bdd->prepare($select);
+        $result2 = $stmt->execute();
+        return $stmt->fetchAll();
+    }
     public function select()
     {
 

@@ -33,14 +33,14 @@ if (isset($_POST['q']) and !empty($_POST['q'])) {
     <title>TRADEGAME</title>
 </head>
 
-<body>
-    <main class="accueil">
+<body class="container-fluid listeJeux">
+    <main>
         <header>
             <?php require_once 'partial/header.php' ?>
         </header>
 
 
-        <div class="container text-center liste-jeux">
+        <div class="text-center liste-jeux">
 
             <h4 class="texth4">Rechercher un jeux</h4>
             <form method="POST" action="liste-jeux.php">
@@ -82,7 +82,7 @@ if (isset($_POST['q']) and !empty($_POST['q'])) {
 
 
         <footer>
-            <?php require_once 'partial/footer.php' ?>
+            <?php require_once 'partial/footer_list.php' ?>
         </footer>
     </main>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>

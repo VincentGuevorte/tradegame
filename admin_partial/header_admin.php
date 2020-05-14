@@ -1,11 +1,11 @@
 <?php 
 
-// if ($_SESSION['role']!= 'ROLE_ADMIN'){
-// // var_dump($_SESSION);
-// // exit;
-// header('location: index.php');
+if ($_SESSION['role']!= 'ROLE_ADMIN'){
+// var_dump($_SESSION);
+// exit;
+header('location: index.php');
 
-// }
+}
 
 ?>
 

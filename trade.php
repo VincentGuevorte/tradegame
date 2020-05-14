@@ -41,8 +41,8 @@ if (isset($_GET['id'])) {
     <title>TRADEGAME</title>
 </head>
 
-<body>
-    <main class="accueil">
+<body class="accueil">
+    <main >
         <header>
             <?php require_once 'partial/header.php' ?>
         </header>
@@ -83,16 +83,24 @@ if (isset($_GET['id'])) {
             <br>
             <div class="row text-center">
                 <div class="col-lg-6">
-                    <a href="" class="btn btn-light modif_status" data-id="<?= $id ?>">OUI</a>
+                    <button class="btn btn-light modif_status" data-id="<?= $id ?>">OUI</button>
                 </div>
                 <div class="col-lg-6">
                     <a href="proposition.php" class="btn btn-danger modif_status" data-id="<?= $id ?>">NON</a>
                 </div>
             </div>
         </div>
-        </div>
+        </div><br>
+        <?php 
+if(isset($_POST['OUI'])){
+
+echo 'Un mail a été envoyé au trader pour lui confirmer le deal';
+echo 'Le statut  était mis a jour';
+
+}
+        ?>
         <footer>
-            <?php require_once 'partial/footer.php' ?>
+            <?php require_once 'partial/footer_list.php' ?>
         </footer>
     </main>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>

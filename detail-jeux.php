@@ -18,17 +18,14 @@ if (isset($_GET['id'])) {
     if (isset($_POST["envoyer"])) {
 
         $proposition = new Proposition($bdd);
-var_dump($_POST);
+        // var_dump($_POST);
         $proposition->setId_user($_SESSION['id']);
         $proposition->setId_jeux_user($_POST['jeux']);
         $proposition->setId_jeux_wanted($id);
 
         $proposition->insert();
-        
-    } 
-    
-}
-else {
+    }
+} else {
 
     // header('location:notfound.php');
 
@@ -45,16 +42,15 @@ else {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Rokkitt&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="public/css/vincent.css">
     <title>TRADEGAME</title>
 </head>
 
-<body>
-    <main class="accueil">
+<body class="accueil">
+    <main>
         <header>
             <?php require_once 'partial/header.php' ?>
         </header>
@@ -68,8 +64,7 @@ else {
         <div class=row>
             <div class="col-lg-10 d-flex border shadow_image_accueil mx-auto">
                 <div class="col-4">
-                    <img class="row justify-content-center image_post mx-auto"
-                        src="public/img/<?= $jeuxInfo['imagename'] ?>" alt="Jeux">
+                    <img class="row justify-content-center image_post mx-auto" src="public/img/<?= $jeuxInfo['imagename'] ?>" alt="Jeux">
                 </div>
                 <div class="col-8">
                     <div class="col-lg-12 col-4 mx-auto ">
@@ -82,16 +77,24 @@ else {
                         <span class=""><?= $jeuxInfo['plateforme'] ?></span><br>
                         <span class=""><?= $jeuxInfo['etat'] ?></span><br>
                         <span class=""><?= $jeuxInfo['prix'] ?>€</span><br>
-                        <form method="post" action="detail-jeux.php?id=<?= $_GET['id']?>" class="">
+                        <form method="post" action="detail-jeux.php?id=<?= $_GET['id'] ?>" class="">
                             <select name="jeux" id="jeux-select">
                                 <?php
-                                    foreach ($posts as $post) {
-                                    ?>
-                                <option value="<?= $post['id'] ?>"><?= $post['name'] ?></option> <?php
-                                                                                                        }
-                                                                                                            ?>
+                                foreach ($posts as $post) {
+                                ?>
+                                    <option value="<?= $post['id'] ?>"><?= $post['name'] ?></option> <?php
+                                                                                                    }
+                                                                                                        ?>
                             </select><br>
                             <button type="submit" name="envoyer" class="btn btn-light">Proposer echange</button>
+
+                            <?php
+
+                            if (isset($_POST['envoyer'])) {
+
+                                echo 'Proposition envoyer';
+                            }
+                            ?>
                         </form>
                     </div>
                 </div>
@@ -102,8 +105,7 @@ else {
             <?php require_once 'partial/footer.php' ?>
         </footer>
     </main>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="public/js/index.js"></script>
 </body>
 

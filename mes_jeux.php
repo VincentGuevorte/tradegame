@@ -24,8 +24,8 @@ $jeux = new Jeux($bdd);
     <title>TRADEGAME</title>
 </head>
 
-<body>
-    <main class="mes-jeux">
+<body class="mes-jeux">
+    <main >
         <header>
             <?php require_once 'partial/header.php' ?>
         </header>
@@ -36,13 +36,7 @@ $jeux = new Jeux($bdd);
                 <section>
                 <h2 class="jeux">Mes jeux</h2>
 
-                <?php
-if (isset($_GET['message'])){
 
-echo $_GET['message'];
-
-}
-                ?>
                     <table class="table table-striped table-bordered mesJeux">
                         <thead>
                             <tr>
@@ -77,7 +71,13 @@ echo $_GET['message'];
                 </section>
                 <a class="btn btn-light ajoutJeux" href="ajout_jeux.php"><span class="glyphicon glyphicon-plus"></span>Ajouter</a>
             </div>
+                <?php
+if (isset($_GET['message'])){
 
+echo $_GET['message'];
+
+}
+                ?>
         </div>
         </div>
         <footer>

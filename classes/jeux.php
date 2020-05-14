@@ -177,6 +177,15 @@ class Jeux
 
         return $this;
     }
+    public function selectOnAdmin()
+    {
+
+        $select = "SELECT * FROM jeux";
+
+        $stmt = $this->bdd->prepare($select);
+        $result2 = $stmt->execute();
+        return $stmt->fetchAll();
+    }
 
     public function select()
     {

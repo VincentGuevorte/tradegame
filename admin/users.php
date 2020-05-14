@@ -3,12 +3,11 @@
 session_start();
 
 require_once '../connexion.php';
+require_once '../classes/user.php';
 
+$user = new User($bdd);
 
-
-$stmt = $bdd->prepare("SELECT * FROM users");
-$result2 = $stmt->execute();
-$result = $stmt->fetchAll();
+$userInfo = $user->selectOnAdmin();
 
 ?>
 
@@ -32,6 +31,7 @@ $result = $stmt->fetchAll();
             <table class="table table-striped table-bordered">
                 <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Nom</th>
                     <th>Prenom</th>
                     <th>Action</th>
@@ -41,13 +41,14 @@ $result = $stmt->fetchAll();
 
                 <?php
 
-                foreach ($result as $user){
+                foreach ($userInfo as $user){
 
                     echo '<tr>';
+                    echo  '<td>' . $user['id'] . '</td>';
                     echo  '<td>' . $user['name'] . '</td>';
                     echo '<td>'  . $user['firstname']  .'</td>';
                     echo'<td width=200>';
-                    echo  '<a class="btn btn-default" href="view.php?id='.$user['id'] . '"><span class="glyphicon glyphicon-eye-open"></span>Voir</a>';
+                    echo  '<a class="btn btn-default" href="view_users.php?id='.$user['id'] . '"><span class="glyphicon glyphicon-eye-open"></span>Voir</a>';
                     echo ' ';
                     echo'<a class="btn btn-danger" href="delete_user.php?Action=Suppression&id='.$user['id'] . '"><span class="glyphicon glyphicon-remove"></span>Supprimer</a>';
 

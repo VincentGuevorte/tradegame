@@ -3,13 +3,11 @@
 session_start();
 
 require_once '../connexion.php';
+require_once '../classes/user.php';
 
+$user = new User($bdd);
 
-
-$id = $_GET['id'];
-$stmt = $bdd->prepare("SELECT * FROM users where users.id=:id");
-$result2 = $stmt->execute(['id' => $id ?? 1]);
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$userInfo = $user->selectOnAdmin();
 
 ?>
 
@@ -33,26 +31,26 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <table class="table table-striped table-bordered">
                 <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Nom</th>
                     <th>Prenom</th>
-                    <th>Adresse</th>
+                    <th>Telephne</th>
                     <th>Email</th>
-                    <th>Anniversaire</th>
                 </tr>
                 </thead>
                 <tbody>
 
                 <?php
 
-                foreach ($result as $user){
+                foreach ($userInfo as $user){
 
                     echo '<tr>';
+                    echo  '<td>' . $user['id'] . '</td>';
                     echo  '<td>' . $user['name'] . '</td>';
                     echo '<td>'  . $user['firstname']  .'</td>';
-                    echo '<td>'  . $user['adress']  .'</td>';
+                    echo '<td>'  . $user['telephone']  .'</td>';
                     echo '<td>'  . $user['email']  .'</td>';
-                    echo '<td>'  . $user['date_birthday']  .'</td>';
-                    echo'</td>';
+
                     echo'</tr>';
                 }
                 ?>

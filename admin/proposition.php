@@ -45,7 +45,7 @@ $proposition = new Proposition($bdd);
                     echo '<tr>';
                     echo  '<td>' . $proposition['username'] . '</td>';
                     echo'<td width=200>';
-                    echo  '<a class="btn btn-primary" href="trade.php?id='.$proposition['id'] . '">
+                    echo  '<a class="btn btn-primary" href="view_proposition.php?id='.$proposition['id'] . '">
                     <span class="glyphicon glyphicon-eye-open"></span>Voir</a>';
                     echo'<td width=200>';
                     echo'<a class="btn btn-danger" href="delete-proposition.php?Action=Suppression&id=
@@ -59,7 +59,6 @@ $proposition = new Proposition($bdd);
                 </tbody>
             </table>
         </section>
-        <a class="btn btn-default" href="add_post.php"><span class="glyphicon glyphicon-plus"></span>Ajouter</a>
     </div>
 </div>
 </body>

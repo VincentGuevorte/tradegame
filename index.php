@@ -45,8 +45,8 @@ if (isset($_POST['q']) and !empty($_POST['q'])) {
     <title>TRADEGAME</title>
 </head>
 
-<body>
-    <main class="accueil">
+<body class="accueil">
+    <main >
         <header>
             <?php require_once 'partial/header.php' ?>
         </header>

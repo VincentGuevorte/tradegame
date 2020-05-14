@@ -52,8 +52,8 @@ $error = 'modification echoué';
     <title>TRADEGAME</title>
 </head>
 
-<body>
-    <main class="monCompte">
+<body class="monCompte">
+    <main >
         <header>
             <?php require_once 'partial/header.php' ?>
         </header>

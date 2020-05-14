@@ -165,6 +165,16 @@ class User
         ]);
     }
 
+    public function selectOnAdmin()
+    {
+
+        $select = "SELECT * FROM users";
+
+        $stmt = $this->bdd->prepare($select);
+        $result2 = $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     public function select()
     {
 

@@ -3,7 +3,7 @@
 <nav class="navbar premiere_barre_nav p-0">
     <ul class="navbar liste_premiere_navbar m-0">
         <li class="nav-item">
-            <a class="nav-link" href="accueil.php">TRADEGAME</a>
+            <a class="nav-link" href="index.php">TRADEGAME</a>
         </li>
     </ul>
 </nav>

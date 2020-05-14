@@ -20,7 +20,7 @@ $lastIdJeux = $jeux->getLastInsertId();
 
 
         
-
+// *******UPLOAD IMAGE*********/
     $target_dir = "public/img/";
 $target_file = $target_dir . basename($_FILES["fichier"]["name"]);
 $uploadOk = 1;
@@ -31,6 +31,13 @@ $filename = $_FILES["fichier"]["name"];
     if($check !== false) {
         echo "File is an image - " . $check["mime"] . ".";
         $uploadOk = 1;
+    }
+// verifier type mime de l'image sécurité 
+
+    $mimetype = mime_content_type($_FILES['fichier']['tmp_name']);
+    if (!in_array($mimetype, array('image/jpeg', 'image/gif', 'image/png'))) {
+        $check = false;
+        echo "l'element n'est pas une image";
     }
 // Check file size
 if ($_FILES["fichier"]["size"] > 5000000) {
