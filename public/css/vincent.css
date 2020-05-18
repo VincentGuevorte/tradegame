@@ -317,7 +317,14 @@ width: 60%;
         position: relative;
     
 }
+.erreur {
 
+margin-top: 10%;
+font-size: xx-large;
+color: blanchedalmond;
+text-shadow: 0.1em 0.1em 0.1em rgb(0, 0, 0);
+
+}
 .bodypop {
     margin-right: 1em;
 }

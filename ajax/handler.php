@@ -8,6 +8,7 @@ use PHPMailer\PHPMailer\Exception;
 require_once('../connexion.php');
 require_once('../classes/proposition.php');
 include('../vendor/autoload.php');
+require_once('../classes/user.php');
 
 
 if (isset($_POST['status'])) {
@@ -16,8 +17,13 @@ if (isset($_POST['status'])) {
     $status = ($_POST['status'] == 'OUI') ? 'Accepter' : 'Refuser';
 
     $proposition = new Proposition($bdd);
+    $proposition->setId($id);
+    $propositionInfo = $proposition->select();
     $result = $proposition->updateStatus($id, $status);
-
+    $user = new User($bdd);
+    $user->setId($propositionInfo['id_users']);
+    $userInfo = $user->select();
+    // var_dump($userInfo);
     if ($result) {
 
         if ($status == 'Accepter') {
@@ -27,11 +33,11 @@ if (isset($_POST['status'])) {
             try {
 
                 $mail->IsSMTP();
-                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
 
                 //Set the hostname of the mail server
                 $mail->Host = 'smtp.gmail.com';
-                
+
                 $mail->Port = 587;
 
                 //Set the encryption mechanism to use - STARTTLS or SMTPS
@@ -39,7 +45,7 @@ if (isset($_POST['status'])) {
 
                 //Whether to use SMTP authentication
                 $mail->SMTPAuth = true;
-               
+
 
                 //Username to use for SMTP authentication - use full email address for gmail
                 $mail->Username = 'projetwebafpa@gmail.com'; // adresse mail pro 
@@ -47,21 +53,21 @@ if (isset($_POST['status'])) {
                 //Password to use for SMTP authentication
                 $mail->Password = 'od020988'; // Mot de passe pro
                 // Content
-                $mail->setFrom('tradegame@example.com', 'Mailer');
-                $mail->addAddress('v.guevorte@gmail.com', 'Joe User');
+                $mail->setFrom('tradegame@echange-jeux.com', 'TradeGame');
+                $mail->addAddress('' . $userInfo['email'] . '', 'Traders');
                 $mail->isHTML(true);                                  // Set email format to HTML
-                $mail->Subject = 'Here is the subject';
-                $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+                $mail->Subject = "Proposition d'echange sur tradegame";
+                $mail->Body    = 'Hello Trader, le trader ' . $userInfo['firstname'] . ' souhaite echanger votre jeux contre le sien !
+                 n\'hesiter plus une seule seconde et contacter le aux ' . $userInfo['telephone'] . '';
                 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
                 $mail->send();
-                echo 'Message has been sent';
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
         }
 
-        echo 'statut mise a jour';
+        echo 'Le statut à bien été mise a jour';
     } else {
 
         echo "statut n'a pas été mise a jour";

@@ -83,22 +83,17 @@ if (isset($_GET['id'])) {
             <br>
             <div class="row text-center">
                 <div class="col-lg-6">
-                    <button class="btn btn-light modif_status" data-id="<?= $id ?>">OUI</button>
+                    <button class="btn btn-light modif_status" name="OUI" data-id="<?= $id ?>">OUI</button>
                 </div>
                 <div class="col-lg-6">
                     <a href="proposition.php" class="btn btn-danger modif_status" data-id="<?= $id ?>">NON</a>
                 </div>
+                <div class="row col-lg-12 mx-auto " id="reponseAjax"></div><br>
+                <a href="proposition.php" class="btn btn-primary mx-auto"<?= $id ?>">Retour</a>
             </div>
         </div>
         </div><br>
-        <?php 
-if(isset($_POST['OUI'])){
-
-echo 'Un mail a été envoyé au trader pour lui confirmer le deal';
-echo 'Le statut  était mis a jour';
-
-}
-        ?>
+        
         <footer>
             <?php require_once 'partial/footer_list.php' ?>
         </footer>

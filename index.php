@@ -3,17 +3,6 @@ session_start();
 require_once 'connexion.php';
 require_once 'classes/jeux.php';
 
-// require_once 'classes/User.php';
-
-// $User = new User();
-
-// var_dump ($User);
-
-// echo $User->nom;
-// echo $User->prenom;
-
-// echo $User->MettreEnRouge();
-
 
 
 $stmt = $bdd->prepare("SELECT * FROM users where id=:id");
@@ -46,7 +35,7 @@ if (isset($_POST['q']) and !empty($_POST['q'])) {
 </head>
 
 <body class="accueil">
-    <main >
+    <main>
         <header>
             <?php require_once 'partial/header.php' ?>
         </header>
