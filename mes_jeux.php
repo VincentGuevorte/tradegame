@@ -56,8 +56,9 @@ $jeux = new Jeux($bdd);
                     echo  '<td>' . $jeux['name'] . '</td>';
                     echo '<td>'  . $jeux['plateforme'] .'</td>';
                     echo '<td>'  . $jeux['prix'] .'€</td>';
-                    echo'<td width=200>';
-                    echo'<a class="btn btn-danger" href="delete-jeux.php?Action=Suppression&id='.$jeux['id'] . '"><span class="glyphicon glyphicon-remove"></span>Supprimer</a>';
+                    echo'<td>';
+                    echo'<a class="btn btn-danger" href="delete-jeux.php?Action=Suppression&id='.$jeux['id'] . '">
+                    <span class="glyphicon glyphicon-remove"></span><i class="fas fa-trash"></i></a>';
 
                     echo'</td>';
 
@@ -80,9 +81,9 @@ echo $_GET['message'];
                 ?>
         </div>
         </div>
-        <footer>
+        
             <?php require_once 'partial/footer.php' ?>
-        </footer>
+        
     </main>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>

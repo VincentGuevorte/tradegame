@@ -17,18 +17,12 @@ require_once 'classes/jeux.php';
     <title>TRADEGAME</title>
 </head>
 
-<body class="accueil" >
+<body class="erreur404" >
     <main class="redirect">
-        <header>
-            <?php require_once "partial/header.php" ?>
-        </header>
         <div class="container text-center erreur">
             <h2>ERROR 404</h2><br>
             <h3>Vous allez être rediriger vers la page d'accueil dans quelque instant ...</h3>
         </div>
-        <footer>
-            <?php require_once 'partial/footer.php' ?>
-        </footer>
     </main>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="public/js/index.js"></script>

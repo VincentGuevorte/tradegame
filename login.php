@@ -1,30 +1,30 @@
-<?php 
+<?php
 session_start();
 require_once('connexion.php');
 require_once('classes/user.php');
+require('connect/config.php');
 
 if (isset($_POST['login'])) {
 
     $user = new User($bdd);
 
-      $resultat = $user->getUserByEmail($_POST['email']);
+    $resultat = $user->getUserByEmail($_POST['email']);
     //   var_dump($resultat);
-      if (count($resultat) > 0 && password_verify($_POST['password'], $resultat['password'])) {
-          $_SESSION['email'] = $resultat['email'];
-          $_SESSION['id'] = $resultat['id'];
-          $_SESSION['role'] = $resultat['role'];
+    if (count($resultat) > 0 && password_verify($_POST['password'], $resultat['password'])) {
+        $_SESSION['email'] = $resultat['email'];
+        $_SESSION['id'] = $resultat['id'];
+        $_SESSION['role'] = $resultat['role'];
 
-          header('location: index.php');
+        header('location: index.php');
 
-          if ($resultat['role']=='ROLE_ADMIN'){
+        if ($resultat['role'] == 'ROLE_ADMIN') {
 
             header('location: admin/index.php');
-          }
-
-      } else {
-          $erreur = 'Non valide';
-      };
-  }
+        }
+    } else {
+        $erreur = 'Non valide';
+    };
+}
 
 ?>
 
@@ -36,8 +36,7 @@ if (isset($_POST['login'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Rokkitt&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="public/css/vincent.css">
@@ -65,17 +64,21 @@ if (isset($_POST['login'])) {
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-warning mt-3" name="login">Se connecter</button>
+                    </div><br>
+                    <div class="text-center">
+                        <a href="https://accounts.google.com/o/oauth2/v2/auth?scope=email&access_type=online&response_type=code&redirect_uri=<?= urlencode('http://localhost/tradegame/index.php')?>&client_id=<?= GOOGLE_ID ?>">
+                        Se connecter avec Google</a>
                     </div>
                 </form>
                 <?php
-   
-                        if (isset($erreur)) {
-                                echo "<div>
+
+                if (isset($erreur)) {
+                    echo "<div>
                                         <span>$erreur</span>
                                     </div>";
-                            }
+                }
 
-    ?>
+                ?>
 
             </div>
         </div>

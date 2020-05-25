@@ -16,7 +16,6 @@ if (isset($_POST['q']) and !empty($_POST['q'])) {
     $q = htmlspecialchars(trim($_POST['q']));
 
     $posts = $jeux->search($q);
-    
 }
 
 ?>
@@ -33,7 +32,7 @@ if (isset($_POST['q']) and !empty($_POST['q'])) {
     <title>TRADEGAME</title>
 </head>
 
-<body class="container-fluid listeJeux">
+<body class="listeJeux">
     <main>
         <header>
             <?php require_once 'partial/header.php' ?>
@@ -47,40 +46,36 @@ if (isset($_POST['q']) and !empty($_POST['q'])) {
                 <input class="search-bar" type="search" id="site-search" name="q" aria-label="Search through site content"><br>
                 <input type='submit' value="Rechercher">
             </form>
-        </div><br>
-        <?php
+        </div>
+        <div class="container-fluid">
+            <?php
 
-        foreach ($posts as $post) {
-        ?>
-            <div class=row>
-                <div class="col-lg-10 d-flex border shadow_image_accueil mx-auto">
-                    <div class="col-4">
-                        <img class="row justify-content-center image_post mx-auto" src="public/img/<?= $post['imagename'] ?>" alt="">
-                    </div>
-                    <div class="col-8">
-                        <div class="col-lg-12 col-4 mx-auto ">
-                            <div class=""><i class="fa fa-user fa-md"></i><?= $post['username'] ?></div>
+            foreach ($posts as $post) {
+            ?>
+                <div class="row my-2">
+                    <div class="col-lg-10 d-flex border shadow_image_accueil mx-auto">
+                        <div class="col-4">
+                            <img class="row justify-content-center image_post mx-auto" src="public/img/<?= $post['imagename'] ?>" alt="">
+                        </div>
+                        <div class="col-8">
+                            <div class="col-lg-12 col-4 mx-auto ">
+                                <div class=""><i class="fa fa-user fa-md"></i><?= $post['username'] ?></div>
 
-                            <div class="col-lg-12 mx-auto">
-                                <h4 class=""><?= $post['name'] ?></h4>
-                                <span class=""><?= $post['etat'] ?></span><br>
-                                <span class=""><?= $post['plateforme'] ?></span><br>
-                                <span class=""><?= $post['prix'] ?>€</span><br>
-                                <?= '<a href="detail-jeux.php?id='.$post['id'].'" class="btn btn-light">Details</a>' ?>
+                                <div class="col-lg-12 mx-auto">
+                                    <h4 class=""><?= $post['name'] ?></h4>
+                                    <span class=""><?= $post['etat'] ?></span><br>
+                                    <span class=""><?= $post['plateforme'] ?></span><br>
+                                    <span class=""><?= $post['prix'] ?>€</span><br>
+                                    <?= '<a href="detail-jeux.php?id=' . $post['id'] . '" class="btn btn-light">Details</a>' ?>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-            </div>
-            <br>
-        <?php
-        }
-        ?>
-
+            <?php
+            }
+            ?>
         </div>
-
-
         <footer>
             <?php require_once 'partial/footer_list.php' ?>
         </footer>

@@ -53,11 +53,11 @@ $error = 'modification echoué';
 </head>
 
 <body class="monCompte">
-    <main >
+    <main>
         <header>
             <?php require_once 'partial/header.php' ?>
         </header>
-        <div class="container text-center">
+        <div class="text-center">
 
             <div class="profil_user mx-auto">
                 <?php
@@ -106,8 +106,6 @@ $error = 'modification echoué';
                 </div>
             </div>
         </div>
-        <br>
-
         <footer>
             <?php require_once 'partial/footer.php' ?>
         </footer>

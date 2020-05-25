@@ -88,12 +88,11 @@ if (isset($_GET['id'])) {
                 <div class="col-lg-6">
                     <a href="proposition.php" class="btn btn-danger modif_status" data-id="<?= $id ?>">NON</a>
                 </div>
-                <div class="row col-lg-12 mx-auto " id="reponseAjax"></div><br>
+                <div class="row col-lg-12 ajaxText" id="reponseAjax"></div><br>
                 <a href="proposition.php" class="btn btn-primary mx-auto"<?= $id ?>">Retour</a>
             </div>
         </div>
         </div><br>
-        
         <footer>
             <?php require_once 'partial/footer_list.php' ?>
         </footer>

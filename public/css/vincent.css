@@ -24,6 +24,26 @@ a {
 
 }
 
+.erreur404 {
+    background-image: url(../img/erreur.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-width: 100%;
+    height: 100%;
+
+}
+
+.ajaxText {
+
+display: flex;
+justify-content: center;
+margin: auto;
+color: blanchedalmond;
+text-shadow: 0.1em 0.1em 0.1em rgb(0, 0, 0);
+font-size: x-large;
+
+}
+
 .listeJeux {
     background-image: url(../img/ListeJeux.png);
     background-size: cover;
@@ -319,7 +339,7 @@ width: 60%;
 }
 .erreur {
 
-margin-top: 10%;
+margin-top: 20%;
 font-size: xx-large;
 color: blanchedalmond;
 text-shadow: 0.1em 0.1em 0.1em rgb(0, 0, 0);
