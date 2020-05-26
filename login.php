@@ -66,7 +66,7 @@ if (isset($_POST['login'])) {
                         <button type="submit" class="btn btn-warning mt-3" name="login">Se connecter</button>
                     </div><br>
                     <div class="text-center">
-                        <a href="https://accounts.google.com/o/oauth2/v2/auth?scope=email&access_type=online&response_type=code&redirect_uri=<?= urlencode('http://localhost/tradegame/index.php')?>&client_id=<?= GOOGLE_ID ?>">
+                        <a href="https://accounts.google.com/o/oauth2/v2/auth?scope=email&access_type=online&response_type=code&redirect_uri=<?= urlencode('http://localhost/tradegame/connect.php')?>&client_id=<?= GOOGLE_ID ?>">
                         Se connecter avec Google</a>
                     </div>
                 </form>
