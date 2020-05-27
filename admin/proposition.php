@@ -34,7 +34,6 @@ $proposition = new Proposition($bdd);
                             <tr>
                                 <th>Traders</th>
                                 <th>Deal</th>
-                                <th>Etat</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -48,7 +47,6 @@ $proposition = new Proposition($bdd);
                     echo'<td width=200>';
                     echo  '<a class="btn btn-primary" href="view_proposition.php?id='.$proposition['id'] . '">
                     <span class="glyphicon glyphicon-eye-open"></span>Voir</a>';
-                    echo  '<td>' . $proposition['etat'] . '</td>';
                     echo'<td width=200>';
                     echo'<a class="btn btn-danger" href="delete-proposition.php?Action=Suppression&id=
                     '.$proposition['id'] . '"><span class="glyphicon glyphicon-remove"></span>Supprimer</a>';

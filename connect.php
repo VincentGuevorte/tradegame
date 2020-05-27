@@ -1,38 +1,93 @@
 <?php
+// Fill these out with the values you got from Google
+$googleClientID = '232256138711-0vu0apjmkk6vhql4jqg6so4tou59m4la.apps.googleusercontent.com';
+$googleClientSecret = 'VAWc_RTW6fn-9ityxkBNe4H7';
+
+// This is the URL we'll send the user to first to get their authorization
+$authorizeURL = 'https://accounts.google.com/o/oauth2/v2/auth';
+
+// This is Google's OpenID Connect token endpoint
+$tokenURL = 'https://www.googleapis.com/oauth2/v4/token';
+
+// The URL for this script, used as the redirect URL
+$baseURL = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'];
+
+// Start a session so we have a place to store things between redirects
 session_start();
-require_once 'vendor/autoload.php'; //Include PHP Client Library
 
-//Create client object and set its configuration
-$client = new Google_Client();
-$client->setAuthConfig('include/client_secret.json');
-$client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] . '/index.php');
-$client->setAccessType('offline');
-$client->setApprovalPrompt('force');
-$client->addScope(array("email", "profile"));
 
-//Check if the access token is already set and if it is, var dump access token
-if(isset($_SESSION["access_token"]) && $_SESSION["access_token"] ) {
 
-    $client->setAccessToken($_SESSION['access_token']);
+// Start the login process by sending the user
+// to Google's authorization page
+if(isset($_GET['action']) && $_GET['action'] == 'login') {
+  unset($_SESSION['user_id']);
 
-    var_dump($_SESSION['access_token']);
+  // Generate a random hash and store in the session
+  $_SESSION['state'] = bin2hex(random_bytes(16));
 
-} else { // if access token is not set, authenticate client
+  $params = array(
+    'response_type' => 'code',
+    'client_id' => $googleClientID,
+    'redirect_uri' => $baseURL,
+    'scope' => 'openid email',
+    'state' => $_SESSION['state']
+  );
 
-  if( !isset($_GET["code"]) ) { // if there is no access code
+  // Redirect the user to Google's authorization page
+  header('Location: ' . $authorizeURL . '?' . http_build_query($params));
+  die();
+}
 
-    $auth_url = $client->createAuthUrl();
-    header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
+if(isset($_GET['action']) && $_GET['action'] == 'logout') {
+  unset($_SESSION['user_id']);
+  header('Location: '.$baseURL);
+  die();
+}
 
-  } else { //if there is an access code
-    
+// When Google redirects the user back here, there will be a "code" and "state"
+// parameter in the query string
+if(isset($_GET['code'])) {
+  // Verify the state matches our stored state
+  // if(!isset($_GET['state']) || $_SESSION['state'] != $_GET['state']) {
+  //   header('Location: ' . $baseURL . '?error=invalid_state');
+  //   die();
+  // }
 
-    // $client->authenticate($_GET['code']); //authenticate client
-    // var_dump($client);
-    // die;
-    $_SESSION['access_token'] = $client->fetchAccessTokenWithAuthCode(urldecode($_GET['code'])); //save access token to session
-    $redirect_uri = "http://".$_SERVER['HTTP_HOST']."/tradegame/index.php";
-    header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
+  // Exchange the auth code for a token
+  $ch = curl_init($tokenURL);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+    'grant_type' => 'authorization_code',
+    'client_id' => $googleClientID,
+    'client_secret' => $googleClientSecret,
+    'redirect_uri' => $baseURL,
+    'code' => $_GET['code']
+  ]));
+  $response = curl_exec($ch);
+  $data = json_decode($response, true);
 
-  }
+  // Note: You'd probably want to use a real JWT library
+  // but this will do in a pinch. This is only safe to do
+  // because the ID token came from the https connection
+  // from Google rather than an untrusted browser redirect
+
+  // Split the JWT string into three parts
+  $jwt = explode('.', $data['id_token']);
+
+  // Extract the middle part, base64 decode it, then json_decode it
+  $userinfo = json_decode(base64_decode($jwt[1]), true);
+
+  $_SESSION['user_id'] = $userinfo['sub'];
+  $_SESSION['email'] = $userinfo['email'];
+  
+
+  // While we're at it, let's store the access token and id token
+  // so we can use them later
+  $_SESSION['access_token'] = $data['access_token'];
+  $_SESSION['id_token'] = $data['id_token'];
+  $_SESSION['id'] = 1;
+  $_SESSION['userinfo'] = $userinfo;
+
+  header('Location: index.php');
+  die();
 }

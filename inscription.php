@@ -53,7 +53,7 @@ $error = 'Enregistrement echoué';
             <div class="globe p-2">
                 <h2 class="mx-auto text-center">Bienvenue sur TradeGame !</h2>
                 <h3 class="mx-auto text-center">Inscrivez vous</h3>
-                <form action="" method="POST" class="align-items-center p-3 col-12">
+                <form action="" method="POST" class="align-items-center p-3 col-12 form-inscription">
                     <div class="col-12 p-0">
                         <div>
                             <label class="col-4" for="">Name :</label>
@@ -70,7 +70,7 @@ $error = 'Enregistrement echoué';
                     <div class="col-12 p-0">
                         <div>
                             <label class="col-4" for="">Email :</label>
-                            <input class="col-7" type="email" name="email">
+                            <input class="col-7" type="text" name="email">
                         </div>
                         <div>
                             <label class="col-4 p-0" for="">Telephone :</label>
@@ -83,7 +83,7 @@ $error = 'Enregistrement echoué';
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-warning mt-4" name="inscription">S'inscrire</button>
+                        <button type="submit" class="btn btn-warning mt-4" id="btn-inscription" name="inscription">S'inscrire</button>
                     </div>
                 </form>
                 <?= isset($error) ? $error : '' ?>
@@ -94,9 +94,8 @@ $error = 'Enregistrement echoué';
             </div>
         </div>
     </div>
-
-
-
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="public/js/index.js"></script>
 </body>
 
 </html>

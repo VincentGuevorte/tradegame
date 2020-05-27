@@ -1,7 +1,6 @@
 <?php
 session_start();
-var_dump($_SESSION);
-die;
+
 require_once 'connexion.php';
 require_once 'classes/jeux.php';
 
@@ -21,6 +20,8 @@ if (isset($_POST['q']) and !empty($_POST['q'])) {
 
     $posts = $jeux->search($q);
 }
+
+
 
 ?>
 <!DOCTYPE html>

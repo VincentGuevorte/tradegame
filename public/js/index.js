@@ -50,3 +50,67 @@ function openModal() {
 function closePopup() {
   overlay.style.display = "none";
 }
+
+
+$('#btn-inscription').on('click',function(e){
+// e.preventDefault();
+var email = $("input[name='email']").val();
+
+   if(!validateEmail(email))
+   {
+     alert('Mauvaise email')
+   }
+   var password = $("input[name='password']").val();
+
+   if(!validatePassword(password))
+   {
+     alert('Le password doit être contenu entre 2 et 8 caracères')
+   }
+});
+
+function verifPassword(champ)
+{
+   if(champ.length < 2 || champ.length > 8)
+   { 
+      return false;
+   }
+   else
+   {  
+      return true;
+   }
+}
+
+function verifTelephone(champ)
+{
+   var regex = /^[0-9._-]$/;
+   if(!regex.test(champ.value))
+   {
+      surligne(champ, true);
+      return false;
+   }
+   else
+   {
+      surligne(champ, false);
+      return true;
+   }
+}
+
+function verify(f)
+{
+   var passwordOk = verifPassword(f.password);
+   var mailOk = verifMail(f.email);
+   var telephoneOk = verifTelephone(f.telephone);
+   
+   if(passwordOk && mailOk && telephoneOk)
+      return true;
+   else
+   {
+      alert("Veuillez remplir correctement tous les champs");
+      return false;
+   }
+}
+
+function validateEmail(email) {
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
