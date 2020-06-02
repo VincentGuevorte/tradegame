@@ -41,13 +41,34 @@ if (isset($_POST['q']) and !empty($_POST['q'])) {
 
         <div class="text-center liste-jeux">
 
-            <h4 class="texth4">Rechercher un jeux</h4>
-            <form method="POST" action="liste-jeux.php">
+            <h4 class="texth4 my-1">Rechercher un jeux</h4>
+            <form method="POST" class="filtre" id="filtre" action="liste-jeux.php">
                 <input class="search-bar" type="search" id="site-search" name="q" aria-label="Search through site content"><br>
-                <input type='submit' value="Rechercher">
-            </form>
+                <input class="my-2" type='submit' value="Rechercher">
+            
+        
+            <div class="row col-lg-12 d-flex justify-content-center">
+            <select name="plateforme">Plateforme
+                <option>Votre plateforme</option>
+                <option>PS4</option>
+                <option>XBOX One</option>
+                <option>Nintendo Swich</option>
+            </select>
+            <select name="prix">Plateforme
+                <option>Prix</option>
+                <option value="20">inferieur à 20€</option>
+                <option value="50">inferieur à 50€</option>
+                <option value="70">inferieur à 70€</option>
+            </select>
+            <select name="etat">Plateforme
+                <option>Etat</option>
+                <option>Occasion</option>
+                <option>Neuf</option>
+            </select>
+            </div> 
+         </form>
         </div>
-        <div class="container-fluid">
+        <div id="content" class="container-fluid">
             <?php
 
             foreach ($posts as $post) {

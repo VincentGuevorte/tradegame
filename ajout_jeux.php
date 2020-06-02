@@ -95,7 +95,7 @@ if ($uploadOk == 0) {
         <header>
             <?php require_once 'partial/header.php' ?>
         </header>
-        <div class="container text-center principal">
+        <div class="container-fluid text-center principal">
             <div class="panel panel-default">
                 <section>
                     <h2 class="jeux">Ajout jeux</h2><br>
@@ -136,7 +136,7 @@ if ($uploadOk == 0) {
                 <a href="mes_jeux.php" class="btn btn-primary mt-4 btnReturn">Retour</a>
             </div>
             <footer>
-                <?php require_once 'partial/footer.php' ?>
+                <?php require_once 'partial/footer_list.php' ?>
             </footer>
     </main>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"

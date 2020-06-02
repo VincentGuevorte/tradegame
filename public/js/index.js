@@ -64,11 +64,17 @@ var email = $("input[name='email']").val();
 
    if(!validatePassword(password))
    {
-     alert('Le password doit être contenu entre 2 et 8 caracères')
+     alert('Le password doit être contenu entre 2 et 8 caractères')
+   }
+   var telephone = $("input[name='telephone']").val();
+
+   if(!validateTelephone(telephone))
+   {
+     alert('Le numéro de telephone doit contenir 10 chiffres')
    }
 });
 
-function verifPassword(champ)
+function validatePassword(champ)
 {
    if(champ.length < 2 || champ.length > 8)
    { 
@@ -80,17 +86,15 @@ function verifPassword(champ)
    }
 }
 
-function verifTelephone(champ)
+function validateTelephone(champ)
 {
-   var regex = /^[0-9._-]$/;
-   if(!regex.test(champ.value))
-   {
-      surligne(champ, true);
+
+   if(champ.length = 10)
+   { 
       return false;
    }
    else
-   {
-      surligne(champ, false);
+   {  
       return true;
    }
 }
@@ -114,3 +118,15 @@ function validateEmail(email) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 }
+
+$("select").on('change', function(){
+  var data = $('#filtre').serialize();
+ $.ajax({
+    url : 'ajax/filtre.php',
+    type : 'POST',
+    data: data, // On désire recevoir du HTML
+    success : function(code_html, statut){ // code_html contient le HTML renvoyé
+        $('#content').html(code_html);
+    }
+ });
+});

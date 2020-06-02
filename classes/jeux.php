@@ -242,7 +242,7 @@ class Jeux
 
     public function search($word)
     {
-$word = htmlspecialchars($word);
+        $word = htmlspecialchars($word);
         $stmt = $this->bdd->prepare('SELECT jeux.*, users.name as username, image.name as imagename FROM jeux
         inner join users ON jeux.id_users=users.id 
         inner join image ON jeux.id=image.id_jeux WHERE jeux.name LIKE :q ORDER BY jeux.id DESC');
@@ -269,7 +269,35 @@ $word = htmlspecialchars($word);
         inner join users ON jeux.id_users=users.id
         WHERE jeux.id = :id");
 
-        $result2 = $stmt->execute(['id'=> $id]);
+        $result2 = $stmt->execute(['id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public function selectByParams($listParams)
+    {
+        if(isset($listParams['q'])){
+            unset($listParams['q']);
+        }
+        $sql = 'SELECT jeux.*, users.name as username, image.name as imagename FROM jeux
+        inner join users ON jeux.id_users=users.id 
+        inner join image ON jeux.id=image.id_jeux WHERE ';
+        foreach($listParams as $champName => $champValue){
+if($champName == 'prix'){
+    $sql.= $champName . ' < :'.$champName.' AND ';
+}else{
+    $sql.= $champName . ' LIKE :'.$champName.' AND ';
+}
+
+$tabParams[$champName] = htmlspecialchars($champValue);
+
+        }
+        $sql = substr($sql, 0, -4);
+        // var_dump($tabParams);
+        // echo $sql;
+        // die;
+        
+        $sql .= 'ORDER BY jeux.id DESC';
+        $stmt = $this->bdd->prepare($sql);
+        $result2 = $stmt->execute($tabParams);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

@@ -46,7 +46,7 @@ font-size: x-large;
 
 .listeJeux {
     background-image: url(../img/ListeJeux.png);
-    background-size: cover;
+    /* background-size: cover; */
     background-repeat: no-repeat;
     min-width: 100%;
     height: 100%;
