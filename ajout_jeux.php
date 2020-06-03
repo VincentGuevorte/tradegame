@@ -66,7 +66,7 @@ if ($uploadOk == 0) {
         
                 $image->insert();
 
-        echo "The file ". basename( $_FILES["fichier"]["name"]). " has been uploaded.";
+       function success($success) {echo "The file ". basename( $_FILES["fichier"]["name"]) .$success. "has been uploaded.";}
     } else {
         echo "Sorry, there was an error uploading your file.";
     }
@@ -135,6 +135,9 @@ if ($uploadOk == 0) {
                 </section>
                 <a href="mes_jeux.php" class="btn btn-primary mt-4 btnReturn">Retour</a>
             </div>
+        <?=
+        $success = '';
+        success($success) ?>
             <footer>
                 <?php require_once 'partial/footer_list.php' ?>
             </footer>
