@@ -82,7 +82,7 @@ echo $_GET['message'];
         </div>
         </div>
         
-            <?php require_once 'partial/footer.php' ?>
+            <?php require_once 'partial/footer_list.php' ?>
         
     </main>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
