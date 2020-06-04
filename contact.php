@@ -2,6 +2,8 @@
 session_start();
 require_once 'connexion.php';
 require_once 'include/private.php';
+require_once 'classes/message.php';
+
 
 $stmt = $bdd->prepare("SELECT * FROM users where id=:id");
 $result2 = $stmt->execute([':id' => $_SESSION['id']]);
