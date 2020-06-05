@@ -114,4 +114,13 @@ class Message
 
         return $this;
     }
+    public function select()
+    {
+
+        $select = "SELECT * FROM messages where id=:id";
+
+        $stmt = $this->bdd->prepare($select);
+        $result2 = $stmt->execute([':id' => $this->id]);
+        return $stmt->fetch();
+    }
 }
