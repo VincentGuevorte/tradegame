@@ -17,10 +17,6 @@ if (isset($_POST['login'])) {
 
         header('location: index.php');
 
-        if ($resultat['role'] == 'ROLE_ADMIN') {
-
-            header('location: admin/index.php');
-        }
     } else {
         $erreur = 'Non valide';
     };
