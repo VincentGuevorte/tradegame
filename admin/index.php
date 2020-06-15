@@ -15,7 +15,7 @@ if (isset($_POST['login'])) {
         $_SESSION['id'] = $resultat['id'];
         $_SESSION['role'] = $resultat['role'];
 
-        header('location: index.php');
+        header('location: user.php');
 
     } else {
         $erreur = 'Non valide';
