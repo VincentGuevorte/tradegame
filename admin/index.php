@@ -15,7 +15,7 @@ if (isset($_POST['login'])) {
         $_SESSION['id'] = $resultat['id'];
         $_SESSION['role'] = $resultat['role'];
 
-        header('location: user.php');
+        header('location: users.php');
 
     } else {
         $erreur = 'Non valide';
@@ -34,16 +34,16 @@ if (isset($_POST['login'])) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin_Connection</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css" rel="stylesheet" media="screen">
     <link href="../css/vincent.css" rel="stylesheet">
 </head>
 
 <body class=" w-100">
+<div class="title-admin">ADMIN</div>
     <div class="col-lg-12 content admin_index">
         <div class="panel panel-default mx-auto">
                 <div class="globe_login p-2">
                         <form action="" method="POST">
-                            <div class="align-items-center col-12">
+                            <div class="align-items-center col-12 admin-connexion">
                             <div>
                                 <label class="col-4" for="">Email :</label>
                                 <input class="col-6" type="email" name="email">

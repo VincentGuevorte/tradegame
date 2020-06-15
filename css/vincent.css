@@ -12,6 +12,23 @@ h1.page-header {
   margin-top: -20px;
 }
 
+.title-admin {
+
+width: 100%;
+display: flex;
+justify-content: center;
+font-size: xx-large;
+
+}
+
+.admin-connexion {
+
+display: grid;
+justify-content: center;
+margin-top: 10%;
+margin-bottom: 10%;
+
+}
 
 .footer {
   width: 100%;
