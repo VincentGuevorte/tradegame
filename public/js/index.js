@@ -27,10 +27,10 @@ $(".modif_status").on("click", function () {
 
 $(".redirect").on("mousemove", function () {
 
-  setTimeout(RedirectionIndex, 5000); //On attend 5 secondes avant d'exécuter la fonction
+  setTimeout(RedirectionIndex, 3000); //On attend 3 secondes avant d'exécuter la fonction
 
   function RedirectionIndex() {
-    //Le code écrit dans cette fonction ne sera exécuté qu'au bout de 5 secondes 
+    //Le code écrit dans cette fonction ne sera exécuté qu'au bout de 3 secondes 
     window.location.href = "http://localhost/tradegame/index.php";
   }
 });
@@ -64,7 +64,7 @@ var email = $("input[name='email']").val();
 
    if(!validatePassword(password))
    {
-     alert('Le password doit être contenu entre 2 et 8 caractères')
+     alert('Le password doit être contenu entre 3 et 10 caractères')
    }
    var telephone = $("input[name='telephone']").val();
 
@@ -76,7 +76,7 @@ var email = $("input[name='email']").val();
 
 function validatePassword(champ)
 {
-   if(champ.length < 2 || champ.length > 8)
+   if(champ.length < 3 || champ.length > 10)
    { 
       return false;
    }
