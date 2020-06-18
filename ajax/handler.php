@@ -58,7 +58,7 @@ if (isset($_POST['status'])) {
                 $mail->isHTML(true);                                  // Set email format to HTML
                 $mail->Subject = "Proposition d'echange sur tradegame";
                 $mail->Body    = 'Hello Trader, le trader ' . $userInfo['firstname'] . ' souhaite echanger votre jeux contre le sien !
-                 n\'hesiter plus une seule seconde et contacter le aux ' . $userInfo['telephone'] . '';
+                 n\'hesiter plus une seule seconde et contacter le aux ' . $userInfo['telephone'] . ' a bientot sur Tradegame.';
                 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
                 $mail->send();
