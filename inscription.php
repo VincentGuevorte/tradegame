@@ -13,7 +13,7 @@ if (isset($_POST['inscription'])) {
     $user->setTelephone($_POST['telephone']);
 
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-
+ 
     $user->setPassword($password);
     
     if ($user->insert()){
@@ -79,6 +79,10 @@ $error = 'Enregistrement echoué';
                         <div>
                             <label class="col-4 p-0" for="">Password :</label>
                             <input class="col-7" type="password" name="password">
+                        </div>
+                        <div>
+                            <label class="col-4 p-0" for="">Confirmation Password :</label>
+                            <input class="col-7" type="password" name="conf-password">
                         </div>
                     </div>
 

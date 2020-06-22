@@ -9,6 +9,7 @@ class User
     public $email;
     public $telephone;
     public $password;
+    public $confirmation_password;
     public $id;
 
     public function __construct($bdd)
@@ -116,6 +117,26 @@ class User
 
         return $this;
     }
+    
+    /**
+     * Get the value of confirmation_password
+     */ 
+    public function getConfirmation_password()
+    {
+        return $this->confirmation_password;
+    }
+
+    /**
+     * Set the value of confirmation_password
+     *
+     * @return  self
+     */ 
+    public function setConfirmation_password($confirmation_password)
+    {
+        $this->confirmation_password = $confirmation_password;
+
+        return $this;
+    }
 
     /**
      * Get the value of id
@@ -139,12 +160,12 @@ class User
     public function insert()
     {
 
-        $insert = "INSERT INTO users (name, firstname, email, telephone, password)
-    VALUES (:name, :firstname, :email, :telephone, :password)";
+        $insert = "INSERT INTO users (name, firstname, email, telephone, password, :conf_password)
+    VALUES (:name, :firstname, :email, :telephone, :password, :conf_password)";
         $stmt = $this->bdd->prepare($insert);
         return $stmt->execute([
             'email' => $this->email, 'firstname' => $this->firstname, 'name' => $this->name,
-            'telephone' => $this->telephone, ':password' => $this->password
+            'telephone' => $this->telephone, ':password' => $this->password, ':conf_password' => $this->conf_password
         ]);
     }
 
