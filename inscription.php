@@ -13,10 +13,13 @@ if (isset($_POST['inscription'])) {
     $user->setTelephone($_POST['telephone']);
 
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $passwordConf = password_hash($_POST['password_conf'], PASSWORD_BCRYPT);
  
     $user->setPassword($password);
     
     if ($user->insert()){
+        
+if($_POST['password']=$_POST['password_conf']){
 
 header('location: login.php');
 
